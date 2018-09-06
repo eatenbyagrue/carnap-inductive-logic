@@ -1,0 +1,147 @@
+#+LATEX_HEADER: \usepackage[backend=biber,authordate, ibidtracker=context,natbib,doi=false,isbn=false,url=false]{biblatex-chicago}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usepackage{yfonts}
+#+LATEX_HEADER: \addbibresource{~/Documents/bibliography/references.bib}
+#+LATEX_HEADER: \usetikzlibrary{bayesnet}
+#+LATEX_HEADER: \onehalfspacing
+#+LATEX_HEADER: \newcommand{\Z}{\textfrak{Z}}
+#+LATEX_HEADER: \renewcommand{\c}{\textfrak{c}}
+#+LATEX_HEADER: \newcommand{\m}{\textfrak{m}}
+#+LATEX_HEADER: \renewcommand{\L}{\textfrak{L}}
+#+LATEX_HEADER: \newcommand{\Str}{\textfrak{Str}}
+#+LATEX_HEADER: \newcommand{\LFp}[1]{\citep[p.~#1]{carnap62_logic_found_probab}}
+#+LATEX_HEADER: \newcommand{\LFt}[1]{\citet[p.~#1]{carnap62_logic_found_probab}}
+#+OPTIONS: toc:t num:t
+#+TITLE: Carnap's Early Inductive Logic and the Problem of Induction
+#+SUBTITLE: XxXx words
+#+AUTHOR: Conrad Friedrich
+#+DATE: \today
+\thispagestyle{empty}
+
+\newpage
+In this paper we want to examine Rudolf Carnap's early attempts at solving the old problem of induction, famously posed by David Hume. 
+* Introduction
+
+- Describe the problem of induction
+- What is induction?
+- Carnap's approach: explicate probability
+- talk about Carnap's concept of probability 
+- But argue that in the end (of what is surveyed in this article), problem of induction is not solved, but logical probability in particular is explicated by highlighting reasonable biases
+- Carnap on induction: p. 178ff.
+- Second aim of this paper is to expound the structure of the formalism and explain which principles and assumptions lead to which conclusions. 
+- Which cases are we looking at? distinguish between enumerative inductivion, generalized induction etc (e.g. see Springier)
+- Do talk a bit about carnap's framework-choice stuff and how he thinks this relates to inductive logic: IL is a part of a framework, hence is defined for a particular language
+
+
+Induction as described in this paper always takes the form of an inference from something observed to something unobserved. Both the observed and the unobserved are expressed in formal sentences in citet:carnap62_logic_found_probab or with the help of set theory in more run-of-the-mill probability theory.
+
+* Carnap's Inductive System
+
+** The Basics
+
+Carnap starts out to explicate the concept of probability_1 by developing a first order language over which functions are defined. Eventually, the functions should assign probabilities to sentences. To develop a framework where he could achieve this, Carnap first defines a logical language. 
+
+The language \L_\infty differs from \L_N by allowing for infinitely many individual constants, whereas \L_N only allows for /N/ many. Throughout this paper, we will only look at \L_N. Carnap postulates a one-to-one correspondence between individuals of the domain and individual constants \LFp{73}. Both languages only contain finitely many predicates.  
+
+For our present purposes, \L_N is equivalent to standard languages of first order logic. There are some kinks and curiosities, but they do not impact any of the points made here. It's noteworthy that Carnap takes a semantically (as opposed to syntactically) oriented approach to defining his language, dovetailing nicely with the central role that state descriptions play in his formal system \LFp{vii}. He effectively limits the language to unary predicates to simplify the inductive rules. citet:paris15_pure_induc_logic expand Carnap's inductive system to /n/-ary predicates.
+
+-maybe include a very short summary of FOL
+
+Carnap pays special attention to /state descriptions/ \LFp{72}. A state description is a sentence which decides every predicate for every individual in the domain. That is, a state description conjoins each atomic sentence or its negation. Carnap labels these `\Z'. We'll adopt some of his notation to highlight when we are speaking of Carnap's system. 
+
+The range \textfrak{R}_i of a sentence /i/ is the set of state descriptions in which /i/ holds. To give an inexact analogy: From a modern perspective we may view the state descriptions as models or possible worlds and ranges then as propositions. 
+
+/Structure descriptions/ (labeled \Str) are also central to Carnap's inductive system. Roughly, a structure description is a set of state descriptions which share the number of instantiations of each predicate. The state descriptions in a structure description differ in that different individual constants instantiate the predicates. For example, with a \L_N with single predicate /Q/ and three individual constants /a,b,c/, these three state descriptions form a structure description, as they share two instances of the predicate:
+
+\begin{align*}
+  P(a).P(b).\sim P(c) \\
+  P(a).\sim P(b).P(c) \\
+  \sim P(a).P(b).P(c) \\
+\end{align*}  
+
+Where `.' denotes a conjunction and `\sim' denotes a negation in Carnap's 
+notation. In Carnap's system, the \Str\ are defined over isomorphic \Z. Two state descriptions are isomorphic when there is a correlation---a one-to-one mapping---between individual constants \LFp{109}, [[citep:caruspt_rudol_carnap][p. 8]].
+
+With the underlying language described, Carnap defines his confirmation function for sentences /h,e/, expressing the degree to which evidence /e/ confirms hypothesis /h/. He does so by first defining a measure function \m\ for sentences of \L_N \LFp{295} to the unit interval. Then he defines a confirmation function 
+\[
+   \c(h,e) = \frac{\m(h,e)}{\m(e)}
+\]
+whenever \m(e) > 0. There are different equivalent axiomatisations in the literature, we'll give the one by [[citet:sznajder17_induc_logic_concep_spaces][p. 34]]:
+
+\begin{align}
+  \c(h,e) &\geq 0 \tag{A1} \\
+  \c(e,e) &= 1 \tag{A2} \\
+  \c(h,e) + \c(\sim h,e) &= 1 \tag{A3} \\
+  \c(h.h',e) &= \c(h,e) \textfrak(h',h.e) \text{ if } \m(h,e) > 0 \tag{A4} 
+\end{align}
+
+An additional requirement Carnap imposes right from the beginning is that his confirmation functions are /regular/. Regularity implies that for all state descriptions \( \m(\Z_i) > 0\), such that only logical falsehoods are measured 0.
+
+If we are interested in the unconditional confirmation, we condition on a logical tautology /t/:
+\[
+\c(e) =_{df} \c(e,t) = \frac{\m(e,t)}{\m(t)} = m(e).
+\]
+
+- Signpost :: These are the basic definitions for Carnap's confirmation function. In order to posit inductive rules, however, these axioms here are not sufficient. In fact, they merely state a conditional probability function, which does not impose any inductive constraints other than probabilistic consistency on the reasoner. Carnap, of course, wants to say more about these constraints. In section XXX we will examine which additional postulates lead to which normative consequences for the inductive reasoner. It is helpful to view the same constraints in the different, but for our purposes equivalent formal system of mathematical probability theory. That's why we'll introduce the relevant notions in the next chapter before returning to Carnap's inductive rules. 
+
+** The Basics: Probability Theory
+
+Following the more orthodox probability theory, we define a probability space \(\langle \Omega, \mathcal{F}, \Pr\rangle \), where: 
+
+- \Omega is a set of outcomes of a hypothetical random experiment.
+- \(\mathcal{F}\) is the set of all events. For finite \Omega, we include all events by requiring \(\mathcal{F} = 2^\Omega\), the power set.
+- \Pr is a function \( \mathcal{F} \rightarrow [0,1] \) adhering to the following well-known axioms. Let \( H, B \in \mathcal{F} \)
+  \begin{align}
+    \Pr(H) &\geq 0 \tag{P1}\\
+    \Pr(\Omega) &= 1 \tag{P2}\\
+    \Pr(H \cup E) &= \Pr(H) \cup \Pr(E) \tag{P3} \text{ for } H \cap E = \emptyset
+  \end{align}
+
+\Pr is then called a probability function. Note that we are not requiring \sigma-additivity, which also states P3 up to countably infinite union. This is analog to just looking at Carnap's finite \L_N.
+
+We define conditional probabilities in the standard way by 
+\[
+\Pr(H|E) = \frac{\Pr(H\cap E)}{\Pr(E)} \text{, if } \Pr(E) > 0. \tag{P4}
+\]
+
+Now we can also require regularity for \Pr, that is, \( \Pr(\omega)\,>\,0 \) for all \( \omega\,\in\,\Omega \).
+
+What is the purpose of making the reader tediously sit through a reiteration of the standard axioms? We want to show the close analogy between both the Carnapian approach of defining a confirmation function as explication for probability_1 over a logical language and the standard mathematical way of defining a probability function. In particular, citet:zabell04_carnap_logic_induc_infer analyzes Carnap's approach exclusively through the mathematical probability lens. In keeping both approaches side by side, we make the parallels especially apparent. 
+
+
+One more bit of formalism is helpful for the following discussion. We are primarily interested in cases where we made a sequence of observations and want to estimate the next outcome. We can model this sequence and the following observation by a particular way of partitioning the sample space \Omega, with the help of random variables. A random variable for our purposes is a function \( X: \Omega \rightarrow \{1,\dots,t\} \). The random variable /X_i/ tracks the /i/-th observation with a number from 1 to /t/, so that the sequence /X_1/, \dots, /X_N/ stands for a sequence of /N/ observations. 
+ 
+What are these parallels, then? 
+ 
+- Compare to standard set-theoretic simple probability theory, quickly! explain random variables.  
+- Why? because 'translates' carnap's system into modern probability theory, also zabell does it so
+- case of interest that of simple partition. 
+- Everything is finite! Note that for infinite uses, you require a \sigma-algebra etc. The logical analogue is Carnap's \L_N infinite language  
+
+** Inductive Rules
+
+- Describe Symmetry. describe m* and c*
+- Identify the requirements for c*: symmetry and p(Str) = p(Str). (What does Carnap call these?) When these are added to the axioms, we get c* 
+- Also describe mKreuz und cKreuz (siehe Anhang cite:carnap62_logic_found_probab und ?)     
+- Introduce example (also used in cite:caruspt_rudol_carnap, cite:carnap55_statis_induc_probab)
+- Describe how c* necessitates an inductive rule.
+
+** Inductive Rules: Probability Theory
+
+- Follow cite:zabell04_carnap_logic_induc_infer in computing p = c* for random variables with more than one value. Fill in derivations where 'just a little algebra is required', but relegate the simplest algebra to the appendix.
+- Then: Apply to example with different inductive inferences
+
+** The \lambda-continuum
+
+Describe shortly Carnap's \lambda -continuum: A parametric family of inductive rules. What do they enable? again using the example. Show effect of different lambdas in a graph
+
+** The \lambda-continuum: probability Theory
+
+Quote Skyrms, Zabell, that symmetric dirichlet distribution account for this in probability theory. maybe develop this for a simple example! -> beta distribution. see also Kruschke.
+
+* What's next?
+
+Give some ideas on where to go. obviously, \lambda -\gamma -continuum. Also: Frequencies of frequencies (noted by Turing, says Zabell, look into that a little).
+
+\printbibliography
