@@ -36,9 +36,9 @@ In this paper we want to examine Rudolf Carnap's early attempts at solving the o
 
 Induction as described in this paper always takes the form of an inference from something observed to something unobserved. Both the observed and the unobserved are expressed in formal sentences in citet:carnap62_logic_found_probab or with the help of set theory in more run-of-the-mill probability theory.
 
-* Carnap's Inductive System
+* Developing a Framework for Confirmation  
 
-** The Basics
+** Carnap's Inductive System
 
 Carnap starts out to explicate the concept of probability_1 by developing a first order language over which functions are defined. Eventually, the functions should assign probabilities to sentences. To develop a framework where he could achieve this, Carnap first defines a logical language. 
 
@@ -54,44 +54,51 @@ The range \textfrak{R}_i of a sentence /i/ is the set of state descriptions in w
 
 /Structure descriptions/ (labeled \Str) are also central to Carnap's inductive system. Roughly, a structure description is a set of state descriptions which share the number of instantiations of each predicate. The state descriptions in a structure description differ in that different individual constants instantiate the predicates. For example, with a \L_N with single predicate /Q/ and three individual constants /a,b,c/, these three state descriptions form a structure description, as they share two instances of the predicate:
 
+
 \begin{align*}
   P(a).P(b).\sim P(c) \\
   P(a).\sim P(b).P(c) \\
   \sim P(a).P(b).P(c) \\
+\tag{Example 1}
 \end{align*}  
 
 Where `.' denotes a conjunction and `\sim' denotes a negation in Carnap's 
-notation. In Carnap's system, the \Str\ are defined over isomorphic \Z. Two state descriptions are isomorphic when there is a correlation---a one-to-one mapping---between individual constants \LFp{109}, [[citep:caruspt_rudol_carnap][p. 8]].
+notation. In Carnap's system, the \Str{} are defined over isomorphic \Z. Two state descriptions are isomorphic when there is a correlation---a one-to-one mapping---between individual constants \LFp{109}, [[citep:caruspt_rudol_carnap][p. 8]].
 
-With the underlying language described, Carnap defines his confirmation function for sentences /h,e/, expressing the degree to which evidence /e/ confirms hypothesis /h/. He does so by first defining a measure function \m\ for sentences of \L_N \LFp{295} to the unit interval. Then he defines a confirmation function 
+With the underlying language described, Carnap defines his confirmation function for sentences /h,e/, expressing the degree to which evidence /e/ confirms hypothesis /h/. He does so by first defining a measure function \m{} for sentences of \L_N \LFp{295} to the unit interval. Then he defines a confirmation function 
 \[
-   \c(h,e) = \frac{\m(h,e)}{\m(e)}
+   \c(h,e) =_{df} \frac{\m(h.e)}{\m(e)}
 \]
 whenever \m(e) > 0. There are different equivalent axiomatisations in the literature, we'll give the one by [[citet:sznajder17_induc_logic_concep_spaces][p. 34]]:
 
 \begin{align}
-  \c(h,e) &\geq 0 \tag{A1} \\
-  \c(e,e) &= 1 \tag{A2} \\
-  \c(h,e) + \c(\sim h,e) &= 1 \tag{A3} \\
-  \c(h.h',e) &= \c(h,e) \textfrak(h',h.e) \text{ if } \m(h,e) > 0 \tag{A4} 
+  \c(h,e) &\geq 0 \tag{C1} \\
+  \c(e,e) &= 1 \tag{C2} \\
+  \c(h,e) + \c(\sim h,e) &= 1 \tag{C3} \\
+  \c(h.h',e) &= \c(h,e) \c(h',h.e) \text{ if } \m(h,e) > 0 \tag{C4} 
 \end{align}
 
-An additional requirement Carnap imposes right from the beginning is that his confirmation functions are /regular/. Regularity implies that for all state descriptions \( \m(\Z_i) > 0\), such that only logical falsehoods are measured 0.
+An additional requirement Carnap imposes right from the beginning is that his confirmation functions are /regular/. Regularity implies that for all state descriptions \( \m(\Z_i) > 0\), such that only logical falsehoods are measured zero.
+
+\[
+\c  \text{ is regular} \tag{C5}
+\]
 
 If we are interested in the unconditional confirmation, we condition on a logical tautology /t/:
 \[
 \c(e) =_{df} \c(e,t) = \frac{\m(e,t)}{\m(t)} = m(e).
 \]
 
+
 - Signpost :: These are the basic definitions for Carnap's confirmation function. In order to posit inductive rules, however, these axioms here are not sufficient. In fact, they merely state a conditional probability function, which does not impose any inductive constraints other than probabilistic consistency on the reasoner. Carnap, of course, wants to say more about these constraints. In section XXX we will examine which additional postulates lead to which normative consequences for the inductive reasoner. It is helpful to view the same constraints in the different, but for our purposes equivalent formal system of mathematical probability theory. That's why we'll introduce the relevant notions in the next chapter before returning to Carnap's inductive rules. 
 
-** The Basics: Probability Theory
+** Basics of Probability Theory
 
 Following the more orthodox probability theory, we define a probability space \(\langle \Omega, \mathcal{F}, \Pr\rangle \), where: 
 
 - \Omega is a set of outcomes of a hypothetical random experiment.
-- \(\mathcal{F}\) is the set of all events. For finite \Omega, we include all events by requiring \(\mathcal{F} = 2^\Omega\), the power set.
-- \Pr is a function \( \mathcal{F} \rightarrow [0,1] \) adhering to the following well-known axioms. Let \( H, B \in \mathcal{F} \)
+- \(\mathcal{F}\) is the set of relevant events. For finite \Omega, we can just include all possible events by requiring \(\mathcal{F} = 2^\Omega\), the power set.
+- \( \Pr: \mathcal{F} \rightarrow [0,1] \) adheres to the following well-known axioms. Let \( H, B \in \mathcal{F} \), then
   \begin{align}
     \Pr(H) &\geq 0 \tag{P1}\\
     \Pr(\Omega) &= 1 \tag{P2}\\
@@ -105,32 +112,80 @@ We define conditional probabilities in the standard way by
 \Pr(H|E) = \frac{\Pr(H\cap E)}{\Pr(E)} \text{, if } \Pr(E) > 0. \tag{P4}
 \]
 
-Now we can also require regularity for \Pr, that is, \( \Pr(\omega)\,>\,0 \) for all \( \omega\,\in\,\Omega \).
-
-What is the purpose of making the reader tediously sit through a reiteration of the standard axioms? We want to show the close analogy between both the Carnapian approach of defining a confirmation function as explication for probability_1 over a logical language and the standard mathematical way of defining a probability function. In particular, citet:zabell04_carnap_logic_induc_infer analyzes Carnap's approach exclusively through the mathematical probability lens. In keeping both approaches side by side, we make the parallels especially apparent. 
-
+Now we can also require regularity for \Pr, that is, 
+\begin{align}
+\Pr(\omega)>0  & \text{ for all }  \omega \in \Omega. \tag{P5}
+\end{align}
 
 One more bit of formalism is helpful for the following discussion. We are primarily interested in cases where we made a sequence of observations and want to estimate the next outcome. We can model this sequence and the following observation by a particular way of partitioning the sample space \Omega, with the help of random variables. A random variable for our purposes is a function \( X: \Omega \rightarrow \{1,\dots,t\} \). The random variable /X_i/ tracks the /i/-th observation with a number from 1 to /t/, so that the sequence /X_1/, \dots, /X_N/ stands for a sequence of /N/ observations. 
- 
-What are these parallels, then? 
- 
-- Compare to standard set-theoretic simple probability theory, quickly! explain random variables.  
-- Why? because 'translates' carnap's system into modern probability theory, also zabell does it so
-- case of interest that of simple partition. 
-- Everything is finite! Note that for infinite uses, you require a \sigma-algebra etc. The logical analogue is Carnap's \L_N infinite language  
+Additionally, following cite:zabell09_carnap_logic_induc_infer, we describe the frequencies of the outcomes, for /t/ possible outcomes of /X/, with a sequence \( n_1,\dots,n_t \). Probabilities for values of random variables are straightforwardly defined over the outcomes the random variables map from to those values.
 
-** Inductive Rules
+** Parallels of Both Approaches
 
-- Describe Symmetry. describe m* and c*
-- Identify the requirements for c*: symmetry and p(Str) = p(Str). (What does Carnap call these?) When these are added to the axioms, we get c* 
-- Also describe mKreuz und cKreuz (siehe Anhang cite:carnap62_logic_found_probab und ?)     
-- Introduce example (also used in cite:caruspt_rudol_carnap, cite:carnap55_statis_induc_probab)
-- Describe how c* necessitates an inductive rule.
+What is the purpose of making the reader sit through a reiteration of the standard axioms? We want to show the close analogy between both the Carnapian approach of defining a confirmation function as explication for probability_1 over a logical language and the standard mathematical way of defining a probability function. In particular, citet:zabell09_carnap_logic_induc_infer analyzes Carnap's approach exclusively from the perspective of mathematical probability. In keeping both approaches side by side, we make the parallels especially apparent. 
+ 
+What are these parallels, then? Let us look at a simple predictive inference. In \L_N, we could describe consecutive observations as a series of individual constants and the predicates they instantiate. Continuing Example 1, we might observe individual /a/ first and determine all its properties, here, deciding whether predicate /P/ applies or not. Next, we observe individual /b/ and so on. A state description is then a complete description of all observations. 
+
+We could also describe the same consecutive observations with probability theory, by assigning a random variable \(X_1\) to the first observations, \(X_2\) to the second and so on. A sequence \(X_1 = 1,X_2 = 1,X_3=0\) would then describe the same observations as the first state description in Example 1. A sequence like this is usually used to describe the outcome of a random process, additionally requiring the random variables to be independent and identically distributed. That is, they are assumed to be sampled from the same underlying distribution and independently so, conditional on the (unknown) parameters of that distribution. We do /not/ require that here, however. 
+
+- Maybe add a note about ascribing a 3-valued random variable, how to express that via predicates (2^8). relaxing of logical dependence
+
+The frequencies of the values in Example 1 can be written as the sequence \(n_1=1,n_2=2\), indicating that a `0' has occurred one time, and a `1' has occurred two times. For all three state descriptions, the frequency counts are identical. For different structure descriptions, the frequency counts differ. Hence, we can represent Carnap's structure descriptions by the sequences of frequency counts.
+
+Quite strikingly, Carnap's measure function \m{} resembles unconditional probabilities, where the confirmation function \c resembles conditional probabilities. More so, it can be shown that both are equivalent, given a suitable corresponding assignment of sentences and random variables, much like we proposed just now.
+
+* Constraints to the Confirmation Function
+
+- Signpost :: Here goes some signposting, talk about that c function not determined uniquely.
+
+** Symmetry   
+
+Carnap defines a symmetric \m function: If \(\Z_i\) and \(\Z_j\) are isomorphic, then \( \m(\Z_i)~=~\m(\Z_j)\). All state descriptions of a structure description are assigned the same measure. A symmetric confirmation function is then defined just as before by conditionalizing. If we require for a confirmation function that 
+
+\begin{equation}
+\tag{C5} \c \text{ is symmetric}
+\end{equation}
+
+we receive a confirmation function which assigns equal confirmation to all state descriptions. This means that to determine the confirmation of a state description, it is sufficient to determine the confirmation of the corresponding structure description. Carnap also calls this feature `The principle of invariance' \LFp{489}, since the confirmation is invariant under permutation of the individual constant, while keeping the predicates fixed. 
+
+He argues that this principle is tacitly agreed on by many authors involved in, using his terminology, explicating probability_1 \LFp{488}. His argument for this principle is straight-forward: On purely logical grounds, we do not have any more reason to expect a particular individual to have a certain property than any other individual. Hence a logical confirmation function does not distinguish these cases. As cite:caruspt_rudol_carnap note, subjective Bayesians would not agree with this assessment. Although they might agree about the specifics of the observations, they also allow non-symmetric[fn::We use /non-symmetric/ instead of /asymmetric/ to emphasize the negation of the specific sense in which symmetry is used here.] prior probability functions. 
+
+The requirement of symmetry already appeared in cite:johnson24_logic_part_iii under the name `permutation postulate'. Interestingly, Carnap cites Johnson [[citep:caruspt_rudol_carnap][p. 10]], but is apparently not aware of his result [[citep:caruspt_rudol_carnap][p. 8]]. 
+
+Symmetry alone does not yield a unique confirmation function, as we'll discuss next.
+
+** The Function c\dag 
+
+The most apparent function that respects symmetry assigns the same value to all state descriptions. By assigning the same confirmation to all state descriptions, we of course also assign the same confirmation to all state descriptions of a structure description. Carnap calls this function \c\dag. He immediately notes the utter uselessness of \c\dag for the purpose of inductive logic, since it makes learning impossible \LFp{565}. In his example we look at a language \L_{101} with a single predicate, where we have already observed that \(Pa_1, Pa_2, \dots, Pa_{100}\). Consider \( h = Pa_{101} \). Then \( \c\dag(h,e) = \frac{\m(h.e)}{\m(e)}\), and since \(\m(e) = \m(h.e) + \m(\sim h.e)\) we have \c\dag(h,e) = 1/2. Although /all/ other individuals where /P/, the confirmation function did not learn anything. This is obviously undesirable.
+
+The function \c\dag shows more, namely that merely respecting the symmetry requirement does not suffice to ensure the /principle of positive instantial relevance/ (PPIR), described by citet:humburg71_princ_instan_relev, which is a central inductive tenet. The PPIR states that for any evidence /e/, individual constants /a,b/, predicate /P/:
+\[
+\tag{PPIR} \c(Pa,e.Pb) > \c(Pa,e).
+\]
+That is, observing another instance should strictly increase the degree of confirmation. This is not the case with \c\dag, which satisfies symmetry, hence symmetry does not suffice for PPIR.
+
+** Structure Description Symmetry
+
+In the appendix of his Logical Foundations, Carnap proposes the additional constraint on measure functions to assign equal confirmation to all /structure descriptions/, too. In want of a label, we'll call this \Str{}-symmetry.
+
+Carnap does not, in fact, give a positive reason to require \Str{}-symmetry, he even doubts that one might be given \LFp{564}. As we will see in sec X.X, 
+
+
+- But with Str-symmetry we get PIR (show derivation, neat. Maybe at the end of the circus.
+
+
+  - Describe Symmetry. describe m* and c*
+  - Identify the requirements for c*: symmetry and p(Str) = p(Str). (What does Carnap call these?) When these are added to the axioms, we get c* 
+  - Also describe mKreuz und cKreuz (siehe Anhang cite:carnap62_logic_found_probab und ?)     
+  - Introduce example (also used in cite:caruspt_rudol_carnap, cite:carnap55_statis_induc_probab)
+  - Describe how c* necessitates an inductive rule.
 
 ** Inductive Rules: Probability Theory
 
-- Follow cite:zabell04_carnap_logic_induc_infer in computing p = c* for random variables with more than one value. Fill in derivations where 'just a little algebra is required', but relegate the simplest algebra to the appendix.
+- Follow cite:zabell09_carnap_logic_induc_infer in computing p = c* for random variables with more than one value. Fill in derivations where 'just a little algebra is required', but relegate the simplest algebra to the appendix.
 - Then: Apply to example with different inductive inferences
+
+* The \lambda-Continuum
 
 ** The \lambda-continuum
 
