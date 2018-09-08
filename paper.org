@@ -1,6 +1,11 @@
 #+LATEX_HEADER: \usepackage[backend=biber,authordate, ibidtracker=context,natbib,doi=false,isbn=false,url=false]{biblatex-chicago}
 #+LATEX_HEADER: \usepackage{setspace}
+# Pretty fractions
+#+LATEX_HEADER: \usepackage{xfrac}
+# Large circles
+#+LATEX_HEADER: \usepackage{fdsymbol}
 #+LATEX_HEADER: \usepackage{tikz}
+# Fraktur Fonts
 #+LATEX_HEADER: \usepackage{yfonts}
 #+LATEX_HEADER: \addbibresource{~/Documents/bibliography/references.bib}
 #+LATEX_HEADER: \usetikzlibrary{bayesnet}
@@ -10,10 +15,14 @@
 #+LATEX_HEADER: \newcommand{\m}{\textfrak{m}}
 #+LATEX_HEADER: \renewcommand{\L}{\textfrak{L}}
 #+LATEX_HEADER: \newcommand{\Str}{\textfrak{Str}}
-#+LATEX_HEADER: \newcommand{\LFp}[1]{\citep[p.~#1]{carnap62_logic_found_probab}}
-#+LATEX_HEADER: \newcommand{\LFt}[1]{\citet[p.~#1]{carnap62_logic_found_probab}}
+
+#+LATEX_HEADER: \newcommand{\wc}{\(\largecircle\)}
+#+LATEX_HEADER: \newcommand{\bc}{\(\largeblackcircle\)}
+
+#+LATEX_HEADER: \newcommand{\LFp}[1]{\citep[p.~#1]{carnap50_logic_found_probab}}
+#+LATEX_HEADER: \newcommand{\LFt}[1]{\citet[p.~#1]{carnap50_logic_found_probab}}
 #+OPTIONS: toc:t num:t
-#+TITLE: Carnap's Early Inductive Logic and the Problem of Induction
+#+TITLE: Carnap's Early Inductive Logic
 #+SUBTITLE: XxXx words
 #+AUTHOR: Conrad Friedrich
 #+DATE: \today
@@ -34,7 +43,7 @@ In this paper we want to examine Rudolf Carnap's early attempts at solving the o
 - Do talk a bit about carnap's framework-choice stuff and how he thinks this relates to inductive logic: IL is a part of a framework, hence is defined for a particular language
 
 
-Induction as described in this paper always takes the form of an inference from something observed to something unobserved. Both the observed and the unobserved are expressed in formal sentences in citet:carnap62_logic_found_probab or with the help of set theory in more run-of-the-mill probability theory.
+Induction as described in this paper always takes the form of an inference from something observed to something unobserved. Both the observed and the unobserved are expressed in formal sentences in citet:carnap50_logic_found_probab or with the help of set theory in more run-of-the-mill probability theory.
 
 * Developing a Framework for Confirmation  
 
@@ -52,18 +61,17 @@ Carnap pays special attention to /state descriptions/ \LFp{72}. A state descript
 
 The range \textfrak{R}_i of a sentence /i/ is the set of state descriptions in which /i/ holds. To give an inexact analogy: From a modern perspective we may view the state descriptions as models or possible worlds and ranges then as propositions. 
 
-/Structure descriptions/ (labeled \Str) are also central to Carnap's inductive system. Roughly, a structure description is a set of state descriptions which share the number of instantiations of each predicate. The state descriptions in a structure description differ in that different individual constants instantiate the predicates. For example, with a \L_N with single predicate /Q/ and three individual constants /a,b,c/, these three state descriptions form a structure description, as they share two instances of the predicate:
+/Structure descriptions/ (labeled \Str) are also central to Carnap's inductive system. Roughly, a structure description is a set of state descriptions which share the number of instantiations of each predicate. The state descriptions in a structure description differ in that different individual constants instantiate the predicates. 
 
-
+- Example 1 :: A language \L_3 with single predicate /P/ and three individual constants /a,b,c/. These three state descriptions form a structure description, as they share two that two individual instantiate the predicate /P/.
 \begin{align*}
   P(a).P(b).\sim P(c) \\
   P(a).\sim P(b).P(c) \\
   \sim P(a).P(b).P(c) \\
-\tag{Example 1}
 \end{align*}  
 
 Where `.' denotes a conjunction and `\sim' denotes a negation in Carnap's 
-notation. In Carnap's system, the \Str{} are defined over isomorphic \Z. Two state descriptions are isomorphic when there is a correlation---a one-to-one mapping---between individual constants \LFp{109}, [[citep:caruspt_rudol_carnap][p. 8]].
+notation. In Carnap's system, the \Str{} are defined over isomorphic \Z. Two state descriptions are isomorphic when there is a correlation---a one-to-one mapping---between individual constants \LFp{109}, [[citep:caruspt_rudol_carnap][p. 8]]., citep:carus_rudol_carnap_carnap_induc_logic 
 
 With the underlying language described, Carnap defines his confirmation function for sentences /h,e/, expressing the degree to which evidence /e/ confirms hypothesis /h/. He does so by first defining a measure function \m{} for sentences of \L_N \LFp{295} to the unit interval. Then he defines a confirmation function 
 \[
@@ -158,7 +166,12 @@ Symmetry alone does not yield a unique confirmation function, as we'll discuss n
 
 The most apparent function that respects symmetry assigns the same value to all state descriptions. By assigning the same confirmation to all state descriptions, we of course also assign the same confirmation to all state descriptions of a structure description. Carnap calls this function \c\dag. He immediately notes the utter uselessness of \c\dag for the purpose of inductive logic, since it makes learning impossible \LFp{565}. In his example we look at a language \L_{101} with a single predicate, where we have already observed that \(Pa_1, Pa_2, \dots, Pa_{100}\). Consider \( h = Pa_{101} \). Then \( \c\dag(h,e) = \frac{\m(h.e)}{\m(e)}\), and since \(\m(e) = \m(h.e) + \m(\sim h.e)\) we have \c\dag(h,e) = 1/2. Although /all/ other individuals where /P/, the confirmation function did not learn anything. This is obviously undesirable.
 
-The function \c\dag shows more, namely that merely respecting the symmetry requirement does not suffice to ensure the /principle of positive instantial relevance/ (PPIR), described by citet:humburg71_princ_instan_relev, which is a central inductive tenet. The PPIR states that for any evidence /e/, individual constants /a,b/, predicate /P/:
+The degree of confirmation \c\dag assigns to \Z_i is then just dependent on the number of state descriptions \(\zeta = \kappa^N\), where /N/ is the number of individual constants in \L_N and \kappa refers to the number of Q-predicates (quasi-predicates). These, roughly, give the different ways in which an individual can be described in \L_N. For example, for a language with a single predicate there are two Q-predicates. Then we can determine 
+\[
+  \m(\Z_i) = \zeta^{-1}.
+\]
+
+But the function \c\dag shows more, namely that merely respecting the symmetry requirement does not suffice to ensure the /principle of positive instantial relevance/ (PPIR), described by citet:humburg71_princ_instan_relev, which is a central inductive tenet. The PPIR states that for any evidence /e/, individual constants /a,b/, predicate /P/:
 \[
 \tag{PPIR} \c(Pa,e.Pb) > \c(Pa,e).
 \]
@@ -166,28 +179,85 @@ That is, observing another instance should strictly increase the degree of confi
 
 ** Structure Description Symmetry
 
-In the appendix of his Logical Foundations, Carnap proposes the additional constraint on measure functions to assign equal confirmation to all /structure descriptions/, too. In want of a label, we'll call this \Str{}-symmetry.
+In the appendix of his Logical Foundations, Carnap proposes an additional constraint on measure functions: Assign equal confirmation to all /structure descriptions/, too. In want of a label, we'll call this \Str{}-symmetry.
 
-Carnap does not, in fact, give a positive reason to require \Str{}-symmetry, he even doubts that one might be given \LFp{564}. As we will see in sec X.X, 
+Carnap does not, in fact, give a positive reason to require \Str{}-symmetry, he even doubts that one might be given \LFp{564}. As we will see in sec X.X, this is the requirement which Carnap weakens when introducing his continua of inductive rules.
 
+This requirement, too, was described earlier by W.E. Johnson citep:zabell82_w,zabell09_carnap_logic_induc_infer, which Johnson labeled 'the combination postulate'.
+
+** The Function c*
+
+Both requirements, symmetry and \Str{}-symmetry, taken together yield a unique confirmation function \c* which Carnap describes in the appendix of this Foundations \LFp{563f.}. Carnap first, again, defines \m*:
+\[
+\m\text{*}(\Z_i) =_{df} \frac{1}{\tau\zeta_i}
+\]
+where \tau is the number of structure descriptions in \L_N and \zeta_i the number of state descriptions isomorphic to \Z_i, that is, those which share a structure description with \Z_i. This definition is not arbitrary, instead it follows directly from both symmetry requirements. 
+
+- maybe say a sentence more why it obviously follows. but will be addressed later anyway.
+
+Carnap determines \tau \LFp{138}:
+\[
+\tau = {N + \kappa - 1 \choose \kappa -1}
+\] 
+where /N/ like before is the number of individuals and \kappa the number of {Q-predicates} for \L_N, and he determines \zeta_i \LFp{140}:
+\[
+\zeta_i = {N \choose N_1,\dots,N_{\kappa}}
+\]
+
+
+
+#+NAME: fig:tableaux
+| \Str_i | \Z_j | P(a) | P(b) | P(c) | P(d) | \m\dag(\Str_i) | \m\dag(\Z_j)  | \m*(\Str_i)  | \m*(\Z_j)     |
+|--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
+|--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
+|      1 |    1 | \bc  | \bc  | \bc  | \bc  | \sfrac{1}{16}  | \sfrac{1}{16} | \sfrac{1}{5} | \sfrac{1}{5}  |
+|--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
+|      2 |    2 | \bc  | \bc  | \bc  | \wc  | \sfrac{1}{4}   | \sfrac{1}{16} | \sfrac{1}{5} | \sfrac{1}{20} |
+|        |    3 | \bc  | \bc  | \wc  | \bc  |                | \sfrac{1}{16} |              | \sfrac{1}{20} |
+|        |    4 | \bc  | \wc  | \bc  | \bc  |                | \sfrac{1}{16} |              | \sfrac{1}{20} |
+|        |    5 | \wc  | \bc  | \bc  | \bc  |                | \sfrac{1}{16} |              | \sfrac{1}{20} |
+|--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
+|      3 |    6 | \bc  | \bc  | \wc  | \wc  | \sfrac{3}{8}   | \sfrac{1}{16} | \sfrac{1}{5} | \sfrac{1}{30} |
+|        |    7 | \bc  | \wc  | \bc  | \wc  |                | \sfrac{1}{16} |              | \sfrac{1}{30} |
+|        |    8 | \bc  | \wc  | \wc  | \bc  |                | \sfrac{1}{16} |              | \sfrac{1}{30} |
+|        |    9 | \wc  | \bc  | \bc  | \wc  |                | \sfrac{1}{16} |              | \sfrac{1}{30} |
+|        |   10 | \wc  | \bc  | \wc  | \bc  |                | \sfrac{1}{16} |              | \sfrac{1}{30} |
+|        |   11 | \wc  | \wc  | \bc  | \bc  |                | \sfrac{1}{16} |              | \sfrac{1}{30} |
+|--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
+|      4 |   12 | \bc  | \wc  | \wc  | \wc  | \sfrac{1}{4}   | \sfrac{1}{16} | \sfrac{1}{5} | \sfrac{1}{20} |
+|        |   13 | \wc  | \bc  | \wc  | \wc  |                | \sfrac{1}{16} |              | \sfrac{1}{20} |
+|        |   14 | \wc  | \wc  | \bc  | \wc  |                | \sfrac{1}{16} |              | \sfrac{1}{20} |
+|        |   15 | \wc  | \wc  | \wc  | \bc  |                | \sfrac{1}{16} |              | \sfrac{1}{20} |
+|--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
+|      5 |   16 | \wc  | \wc  | \wc  | \wc  | \sfrac{1}{16}  | \sfrac{1}{16} | \sfrac{1}{5} | \sfrac{1}{5}  |
 
 - But with Str-symmetry we get PIR (show derivation, neat. Maybe at the end of the circus.
 
 
   - Describe Symmetry. describe m* and c*
   - Identify the requirements for c*: symmetry and p(Str) = p(Str). (What does Carnap call these?) When these are added to the axioms, we get c* 
-  - Also describe mKreuz und cKreuz (siehe Anhang cite:carnap62_logic_found_probab und ?)     
+  - Also describe mKreuz und cKreuz (siehe Anhang cite:carnap50_logic_found_probab und ?)     
   - Introduce example (also used in cite:caruspt_rudol_carnap, cite:carnap55_statis_induc_probab)
   - Describe how c* necessitates an inductive rule.
 
-** Inductive Rules: Probability Theory
+** The Function c*
 
+
+cite:carnap55_statis_induc_probab
+
+** Constraints in Probability Theory
+
+
+** TODO Example
+
+* Inductive Rules/Predictive Inference
+
+** Carnap
 - Follow cite:zabell09_carnap_logic_induc_infer in computing p = c* for random variables with more than one value. Fill in derivations where 'just a little algebra is required', but relegate the simplest algebra to the appendix.
 - Then: Apply to example with different inductive inferences
+** Probability Theory
 
-* The \lambda-Continuum
-
-** The \lambda-continuum
+* The \lambda-continuum
 
 Describe shortly Carnap's \lambda -continuum: A parametric family of inductive rules. What do they enable? again using the example. Show effect of different lambdas in a graph
 
