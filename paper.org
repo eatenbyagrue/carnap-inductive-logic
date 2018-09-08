@@ -21,13 +21,15 @@
 
 #+LATEX_HEADER: \newcommand{\LFp}[1]{\citep[p.~#1]{carnap50_logic_found_probab}}
 #+LATEX_HEADER: \newcommand{\LFt}[1]{\citet[p.~#1]{carnap50_logic_found_probab}}
-#+OPTIONS: toc:t num:t
+#+OPTIONS: toc:nil num:t
 #+TITLE: Carnap's Early Inductive Logic
 #+SUBTITLE: XxXx words
 #+AUTHOR: Conrad Friedrich
 #+DATE: \today
 \thispagestyle{empty}
 
+\newpage
+\tableofcontents
 \newpage
 In this paper we want to examine Rudolf Carnap's early attempts at solving the old problem of induction, famously posed by David Hume. 
 * Introduction
@@ -74,9 +76,12 @@ Where `.' denotes a conjunction and `\sim' denotes a negation in Carnap's
 notation. In Carnap's system, the \Str{} are defined over isomorphic \Z. Two state descriptions are isomorphic when there is a correlation---a one-to-one mapping---between individual constants \LFp{109}, [[citep:caruspt_rudol_carnap][p. 8]]., citep:carus_rudol_carnap_carnap_induc_logic 
 
 With the underlying language described, Carnap defines his confirmation function for sentences /h,e/, expressing the degree to which evidence /e/ confirms hypothesis /h/. He does so by first defining a measure function \m{} for sentences of \L_N \LFp{295} to the unit interval. Then he defines a confirmation function 
-\[
-   \c(h,e) =_{df} \frac{\m(h.e)}{\m(e)}
-\]
+
+\begin{equation}
+  \label{eq:conf} 
+  \c(h,e) =_{df} \frac{\m(h.e)}{\m(e)}
+\end{equation}
+
 whenever \m(e) > 0. There are different equivalent axiomatisations in the literature, we'll give the one by [[citet:sznajder17_induc_logic_concep_spaces][p. 34]]:
 
 \begin{align}
@@ -100,7 +105,7 @@ If we are interested in the unconditional confirmation, we condition on a logica
 
 - Signpost :: These are the basic definitions for Carnap's confirmation function. In order to posit inductive rules, however, these axioms here are not sufficient. In fact, they merely state a conditional probability function, which does not impose any inductive constraints other than probabilistic consistency on the reasoner. Carnap, of course, wants to say more about these constraints. In section XXX we will examine which additional postulates lead to which normative consequences for the inductive reasoner. It is helpful to view the same constraints in the different, but for our purposes equivalent formal system of mathematical probability theory. That's why we'll introduce the relevant notions in the next chapter before returning to Carnap's inductive rules. 
 
-** Basics of Probability Theory
+** Basics Probability Theory
 
 Following the more orthodox probability theory, we define a probability space \(\langle \Omega, \mathcal{F}, \Pr\rangle \), where: 
 
@@ -110,10 +115,11 @@ Following the more orthodox probability theory, we define a probability space \(
   \begin{align}
     \Pr(H) &\geq 0 \tag{P1}\\
     \Pr(\Omega) &= 1 \tag{P2}\\
-    \Pr(H \cup E) &= \Pr(H) \cup \Pr(E) \tag{P3} \text{ for } H \cap E = \emptyset
+    \Pr(H \cup E) &= \Pr(H) + \Pr(E) \tag{P3} \text{ for } H \cap E = \emptyset
   \end{align}
 
-\Pr is then called a probability function. Note that we are not requiring \sigma-additivity, which also states P3 up to countably infinite union. This is analog to just looking at Carnap's finite \L_N.
+\Pr is then called a probability function. Note that we are not requiring \sigma-additivity, which also states P3 up to countably infinite union. This is analogous to just looking at Carnap's finite \L_N.
+
 
 We define conditional probabilities in the standard way by 
 \[
@@ -171,7 +177,7 @@ The degree of confirmation \c\dag assigns to \Z_i is then just dependent on the 
   \m(\Z_i) = \zeta^{-1}.
 \]
 
-But the function \c\dag shows more, namely that merely respecting the symmetry requirement does not suffice to ensure the /principle of positive instantial relevance/ (PPIR), described by citet:humburg71_princ_instan_relev, which is a central inductive tenet. The PPIR states that for any evidence /e/, individual constants /a,b/, predicate /P/:
+The function \c\dag is then defined over \m\dag as described in equation \ref{eq:conf}. But the function \c\dag shows more, namely that merely respecting the symmetry requirement does not suffice to ensure the /principle of positive instantial relevance/ (PPIR), described by citet:humburg71_princ_instan_relev, which is a central inductive tenet. The PPIR states that for any evidence /e/, individual constants /a,b/, predicate /P/:
 \[
 \tag{PPIR} \c(Pa,e.Pb) > \c(Pa,e).
 \]
@@ -187,7 +193,7 @@ This requirement, too, was described earlier by W.E. Johnson citep:zabell82_w,za
 
 ** The Function c*
 
-Both requirements, symmetry and \Str{}-symmetry, taken together yield a unique confirmation function \c* which Carnap describes in the appendix of this Foundations \LFp{563f.}. Carnap first, again, defines \m*:
+Both requirements, symmetry and \Str{}-symmetry, taken together yield a unique confirmation function \c* \LFp{563f.}. Carnap first, again, defines \m*:
 \[
 \m\text{*}(\Z_i) =_{df} \frac{1}{\tau\zeta_i}
 \]
@@ -199,15 +205,16 @@ Carnap determines \tau \LFp{138}:
 \[
 \tau = {N + \kappa - 1 \choose \kappa -1}
 \] 
-where /N/ like before is the number of individuals and \kappa the number of {Q-predicates} for \L_N, and he determines \zeta_i \LFp{140}:
+where /N/, like before, is the number of individuals and \kappa the number of {Q-predicates} for \L_N, and he determines \zeta_i \LFp{140}:
 \[
 \zeta_i = {N \choose N_1,\dots,N_{\kappa}}
 \]
+where \( N_1,\dots,N_{\kappa} \) gives the number of individuals that instantiate each of the \kappa many Q-predicates in \Z_i. Carnap's terminology can be a bit cumbersome, which makes these definitions less obvious as could be. To help clarify, we follow citet:carnap55_statis_induc_probab,caruspt_rudol_carnap and give the following simple example.
 
+- Example 2 :: Let \L_4 be a language consisting of a single predicate /P/ and four individual constants /a,b,c,d/. Then we have \(\kappa = 2\) Q-predicates (just /P/ and \(\sim P\)), and therefore \(\zeta = \kappa^N = 16 \) state descriptions. We have \(\tau = {5 \choose 1}\) structure descriptions. \Str_3, whose state descriptions have two individuals that are /P/ and two that aren't, has \(\zeta_{6} = \dots = \zeta_{11} = {4 \choose 2} = 6 \) state descriptions. All corresponding measures are given in the overview table.
 
-
-#+NAME: fig:tableaux
-| \Str_i | \Z_j | P(a) | P(b) | P(c) | P(d) | \m\dag(\Str_i) | \m\dag(\Z_j)  | \m*(\Str_i)  | \m*(\Z_j)     |
+#+ATTR_LATEX: :float t :environment longtable 
+| \Str_j | \Z_i | P(a) | P(b) | P(c) | P(d) | \m\dag(\Str_j) | \m\dag(\Z_i)  | \m*(\Str_j)  | \m*(\Z_i)     |
 |--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
 |--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
 |      1 |    1 | \bc  | \bc  | \bc  | \bc  | \sfrac{1}{16}  | \sfrac{1}{16} | \sfrac{1}{5} | \sfrac{1}{5}  |
@@ -231,24 +238,10 @@ where /N/ like before is the number of individuals and \kappa the number of {Q-p
 |--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
 |      5 |   16 | \wc  | \wc  | \wc  | \wc  | \sfrac{1}{16}  | \sfrac{1}{16} | \sfrac{1}{5} | \sfrac{1}{5}  |
 
-- But with Str-symmetry we get PIR (show derivation, neat. Maybe at the end of the circus.
-
-
-  - Describe Symmetry. describe m* and c*
-  - Identify the requirements for c*: symmetry and p(Str) = p(Str). (What does Carnap call these?) When these are added to the axioms, we get c* 
-  - Also describe mKreuz und cKreuz (siehe Anhang cite:carnap50_logic_found_probab und ?)     
-  - Introduce example (also used in cite:caruspt_rudol_carnap, cite:carnap55_statis_induc_probab)
-  - Describe how c* necessitates an inductive rule.
-
-** The Function c*
-
-
-cite:carnap55_statis_induc_probab
+ Since symmetry and \Str-symmetry determine a unique confirmation function, they also determine a unique inductive rule which prescribes how much any evidence confirms any hypothesis expressible in \L_N. In the section X, we will give a derivation of this rule and examine its properties. In order to do so and to elucidate the foregoing, it is very helpful to rephrase what has been developed in this section in terms of probability theory.
 
 ** Constraints in Probability Theory
 
-
-** TODO Example
 
 * Inductive Rules/Predictive Inference
 
