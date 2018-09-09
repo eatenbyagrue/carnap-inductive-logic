@@ -25,7 +25,6 @@
 #+OPTIONS: toc:nil num:t author:nil subtitle:nil
 #+TITLE: Carnap's Early Inductive Logic
 #+SUBTITLE: XxXx words
-#+DATE: \today
 \thispagestyle{empty}
 
 \newpage
@@ -58,7 +57,7 @@ The language \L_\infty differs from \L_N by allowing for infinitely many individ
 
 For our present purposes, \L_N is equivalent to standard languages of first order logic. There are some kinks and curiosities, but they do not impact any of the points made here. It's noteworthy that Carnap takes a semantically (as opposed to syntactically) oriented approach to defining his language, dovetailing nicely with the central role that state descriptions play in his formal system \LFp{vii}. He effectively limits the language to unary predicates to simplify the inductive rules. citet:paris15_pure_induc_logic expand Carnap's inductive system to /n/-ary predicates.
 
--maybe include a very short summary of FOL
+*** TODO maybe include a very short summary of FOL
 
 Carnap pays special attention to /state descriptions/ \LFp{72}. A state description is a sentence which decides every predicate for every individual in the domain. That is, a state description conjoins each atomic sentence or its negation. Carnap labels these `\Z'. We'll adopt some of his notation to highlight when we are speaking of Carnap's system. 
 
@@ -175,7 +174,11 @@ The degree of confirmation \c\dag assigns to \Z_i is then just dependent on the 
   \m(\Z_i) = \zeta^{-1}.
 \]
 
-The function \c\dag is then defined over \m\dag as described in Equation \ref{eq:conf}. But the function \c\dag shows more, namely that merely respecting the symmetry requirement does not suffice to ensure the /principle of positive instantial relevance/ (PPIR), described by citet:humburg71_princ_instan_relev, which is a central inductive tenet. The PPIR states that for any evidence /e/, individual constants /a,b/, predicate /P/:
+The function \c\dag is then defined over \m\dag as described in Equation \ref{eq:conf}. But the function \c\dag shows more, namely that merely respecting the symmetry requirement does not suffice to ensure the /principle of positive instantial relevance/ (PPIR), described by citet:humburg71_princ_instan_relev, which is a central inductive tenet.
+
+*** TODO Maybe say why?
+
+The PPIR states that for any evidence /e/, individual constants /a,b/, predicate /P/:
 \[
 \tag{PPIR} \c(Pa,e.Pb) > \c(Pa,e).
 \]
@@ -192,12 +195,13 @@ This requirement, too, was described earlier by W.E. Johnson citep:zabell82_w,za
 ** The Function c*
 
 Both requirements, symmetry and \Str{}-symmetry, taken together yield a unique confirmation function \c* \LFp{563f.}. Carnap first, again, defines \m*:
-\[
-\m\text{*}(\Z_i) =_{df} \frac{1}{\tau\zeta_i}
-\]
+\begin{equation}
+  \label{eq:probmast}
+  \m\text{*}(\Z_i) =_{df} \frac{1}{\tau\zeta_i}
+\end{equation}
 where \tau is the number of structure descriptions in \L_N and \zeta_i the number of state descriptions isomorphic to \Z_i, that is, those which share a structure description with \Z_i. This definition is not arbitrary, instead it follows directly from both symmetry requirements. 
 
-- maybe say a sentence more why it obviously follows. but will be addressed later anyway.
+*** TODO maybe say a sentence more why it obviously follows. but will be addressed later anyway.
 
 Carnap determines \tau \LFp{138}:
 \begin{equation}
@@ -209,7 +213,7 @@ where /N/, like before, is the number of individuals and \kappa the number of {Q
 \]
 where \( N_1,\dots,N_{\kappa} \) gives the number of individuals that instantiate each of the \kappa many Q-predicates in \Z_i. Carnap's terminology can be a bit cumbersome, which makes these definitions less obvious. To help clarify, we follow citet:carnap55_statis_induc_probab,caruspt_rudol_carnap and give the following simple example.
 
-- Example 2 :: Let \L_4 be a language consisting of a single predicate /P/ and four individual constants /a,b,c,d/. Then we have \(\kappa = 2\) Q-predicates (just /P/ and \(\sim P\)), and therefore \(\zeta = \kappa^N = 16 \) state descriptions. We have \(\tau = {5 \choose 1}\) structure descriptions. \Str_3, whose state descriptions have two individuals that are /P/ and two that aren't, has \(\zeta_{6} = \dots = \zeta_{11} = {4 \choose 2} = 6 \) state descriptions. The corresponding measures are given in the overview table.
+- Example 2 :: Let \L_4 be a language consisting of a single predicate /P/ and four individual constants /a,b,c,d/. Then we have \(\kappa = 2\) Q-predicates (just /P/ and \(\sim P\)), and therefore \(\zeta = \kappa^N = 16 \) state descriptions. We have \(\tau = {5 \choose 1}\) structure descriptions. \Str_3, whose state descriptions have two individuals that are /P/ and two that aren't, has \(\zeta_{6} = \dots = \zeta_{11} = {4 \choose 2} = 6 \) state descriptions. The corresponding measures are given in the overview table. Filled circles stand for instantiated predicates.
 
 #+ATTR_LATEX: :float t :environment longtable 
 | \Str_j | \Z_i | P(a) | P(b) | P(c) | P(d) | \m\dag(\Str_j) | \m\dag(\Z_i)  | \m*(\Str_j)  | \m*(\Z_i)     |
@@ -240,7 +244,7 @@ where \( N_1,\dots,N_{\kappa} \) gives the number of individuals that instantiat
 
 ** Constraints Probability Theory
 
- Carnap's contraints and confirmation functions can be straightforwardly represented as standard probability. Recall from Section [[Parallels of Both Approaches]] that a state description as Carnap uses them can be analogously described as a sequence of random variables taking definite values. Each random variable then stands for an individual constants. The values of a random variable correspond to the Q-predicates. For example, a random variable \(X_i\) taking a value in \(1,\dots,t\) with \(t=4\) corresponds to an individual constant satisfying one of the \(\kappa = 4\) formulas \(P(x).R(x), ~P(x).\sim R(x), ~\sim P(x).R(x), ~\sim P(x).\sim R(x)\).[fn::As an aside, note that the number of Q-predicates used this way is constricted to powers of two, since each atomic predicate can either be instantiated or not. Using random variables is more expressive in this sense, since we also can set \(t=3\). In the preface to his second edition \LFp{xx}, Carnap notes that the same expressiveness can be achieved by giving up the requirement of logical independence of the atoms.] We follow cite:zabell09_carnap_logic_induc_infer in describing this approach in probability theory.  
+ Carnap's contraints and confirmation functions can be straightforwardly represented as standard probability. Recall from Section [[Parallels of Both Approaches]] that a state description as Carnap uses them can be analogously described as a sequence of random variables taking definite values. Each random variable then stands for an individual constants. The values of a random variable correspond to the Q-predicates. For example, a random variable \(X_i\) taking a value in \(1,\dots,t\) with \(t=4\) corresponds to an individual constant satisfying one of the \(\kappa = 4\) formulas \(P(x).R(x), ~P(x).\sim R(x), ~\sim P(x).R(x), ~\sim P(x).\sim R(x)\).[fn::As an aside, the number of Q-predicates used this way is constricted to powers of two, since each atomic predicate can either be instantiated or not. Using random variables is more expressive in this sense, since we also can set, e.g., \(t=3\). In the preface to his second edition \LFp{xx}, Carnap hints that the same expressiveness can be achieved by giving up the requirement of logical independence of the atoms.] We follow cite:zabell09_carnap_logic_induc_infer in describing this approach in probability theory.  
 
 We can require /symmetry/ on a probability function by assigning each sequence \(X_1 = e_1,\dots,X_n=e_n\) (in short: \(e_1,\dots,e_n\) of a frequency count \(n_1,\dots,n_t\) the same probability. This assumptions is also called /exchangeability/ since Bruno de Finetti [[citep:zabell09_carnap_logic_induc_infer][p. 272]]. Since the different sequences are mutually exclusive, this amounts by P3 to
 \begin{equation}
@@ -253,7 +257,7 @@ Carnap's \Str-symmetry can be captured by requiring the same probability for all
 \label{eq:freq}
 f_n = \binom{n + t - 1}{n}
 \end{equation}
-which is equal to Carnap's number of structure descriptions \tau[fn:: citet:zabell07_carnap,zabell09_carnap_logic_induc_infer gives this count as \({n +t -1 \choose t}\), citing cite:feller68_introd_probab_theor_applic, which we maybe mistakenly found to be not equivalent to Carnap's formulation and also to not yield the later results.] (see Appendix). The frequency count's probability then accordingly
+which is equal to Carnap's number of structure descriptions \tau[fn:: citet:zabell07_carnap,zabell09_carnap_logic_induc_infer gives \(f_n\) instead as \({n +t -1 \choose t}\), citing cite:feller68_introd_probab_theor_applic, which we strangely found to be not equivalent to Carnap's formulation and also to not yield the later results. We suspect we made a mistake somewhere.] (see Appendix). The frequency count's probability is then accordingly
 \begin{equation}
 \label{eq:probfreq2}
 \Pr(n_1,\dotsc,n_t) = \frac{1}{f_n}.
@@ -261,21 +265,71 @@ which is equal to Carnap's number of structure descriptions \tau[fn:: citet:zabe
 
 Equations \ref{eq:probfreq1}, \ref{eq:freq} and \ref{eq:probfreq2} together give
 \begin{equation}
-\Pr(e_1,\dotsc,e_n) = \left[ \binom{n+t-1}{n}\binom{n}{n_1\dots n_t}\right]^{-1}
+\Pr(e_1,\dotsc,e_n) = \left[ \binom{n+t-1}{n}\binom{n}{n_1\dots n_t} \right]^{-1}.
+\end{equation} 
+which is the analogous result to \( \m\text{*}(\Z_i) \) (Equation \ref{eq:probmast}).
+And, like \c*, the requirements completely determine a probability function. 
+
+In the following section we will look at and give a derivation of the inductive rules that are necessitated by the requirements.
+
+* Inductive Rules
+ 
+- Signpost :: The discussion so far laid the groundwork of Carnap's inductive logic. We are now in a position to derive Carnap's inductive rules. For the purposes of this paper, we concentrate on what Carnap calls /singular predictive inference/, which he judges the most important inductive inference \LFp{568}.
+
+Carnap gives his inductive rule for how much evidence /e/ of previously observed instances for a hypotheses /h/ which ascribes a Q-predicate, say /Q/, to the next observed instance as: 
+\begin{equation}
+   \label{eq:rulecast}
+   \c\text{*}(h,e) = \frac{s_i + 1}{s + \kappa}  
+\end{equation}
+where \( \sfrac{s_i}{s}\) is the fraction of observed Q-instances in all observed instances, and /kappa/ as before the number of Q-predicates of the language. Furthermore, Carnap states that just the evidence of the frequencies is sufficient for the same confirmation of hypothesis /h/. We will see shortly how that can be derived, too. For this purpose, it is convenient to work in standard probability theory again. 
+
+In probability theory, the corresponding rule can be stated as
+\begin{equation}
+\label{eq:ruleprob}
+\Pr(X_{n+1} = c_i | X_1 = e_1,\dotsc,X_n = e_n) = \frac{n_i + 1}{n + t}.
 \end{equation}
 
+This rule can be derived from both symmetry requirements (see Appendix). 
 
+Furthermore, as cite:zabell07_carnap states, just symmetry is enough to establish the following equality (again, see Appendix):
+\begin{equation}
+\label{eq:probequa}
+  \Pr(X_{n+1} = c_i | X_1 = e_1,\dotsc,X_n = e_n) = \Pr(X_{n+1} = c_i| n_1,\dotsc,n_t) 
+\end{equation} 
 
-* Inductive Rules/Predictive Inference
+which yields together with Equation \ref{eq:ruleprob}:
+\begin{equation}
+\label{eq:ruleprob2}
+\Pr(X_{n+1} = c_i | n_1,\dotsc,n_t) = \frac{n_i + 1}{n + t}.
+\end{equation}
 
-** Carnap
-- Follow cite:zabell09_carnap_logic_induc_infer in computing p = c* for random variables with more than one value. Fill in derivations where 'just a little algebra is required', but relegate the simplest algebra to the appendix.
-- Then: Apply to example with different inductive inferences
-** Probability Theory
+That is, the probability that the next observed variable takes the value /c_i/ is not dependent only on the frequency counts. This is what Carnap stated in his formulation of the inductive rule for \c*, derived in probability theory.
 
-* The \lambda-continuum
+Let us look at an example which highlights the parallels both ways of addressing the problem. We look again in Carnap's system at Example 2 with a single predicate /P/ and four individual constants. Suppose we observed three /P/ already. To what degree does `\(P(a).P(b).P(c)\)' confirm `\(P(d)\)'? The only two state descriptions not ruled out by the evidence are \Z_1 and \Z_2 (see table in Section [[The Function c*]]). We can quickly judge that the confirmation has to be \(\frac{\sfrac{1}{5}}{\sfrac{1}{5} + \sfrac{1}{20}} = \sfrac{4}{5} \). Using the inductive rule, we get for \(s_i = s = 3, \kappa =2\) a confirmation of \(\c\text{*}(h,e) = \sfrac{4}{5}\). 
+
+Correspondingly, suppose we observed three random variables all taking value `1' and are interested in the conditional probability of \(X_4 = 1\). Then \(n_i = n = 3, t=2 \) and \(\Pr(X_4 = 1|X_1=1,X_2=1,X_3=1) = \sfrac{4}{5}\). 
+
+So far the technical aspects. How useful is this rule for the purpose of explicating probability_1? 
+
+First, the rule satisfies the principle of positive instantial relevance (PPIR). To see this, just note that the probability (Equation \ref{eq:ruleprob2}) is strictly monotonically increasing in \(n_i\). So for any previous evidence, the posterior probability given \(n_i + 1\) increases over \(n_i\). We see that symmetry and \Str-symmetry taken together suffice to satisfy PPIR.
+
+Second, one of Carnap's main motivations was to justify inductive inferences on purely logico-mathematical grounds. Carnap himself, however, already described the assumption of \Str-symmetry as very hard to argue for. He does not give an independent argument for accepting this assumption.
+
+*** TODO Describe how this is equivalent to assuming a flat prior over theta or hint at next section
+
+* TODO The \lambda-continuum
+
+citet:carnap52_contin_induc_method introduces a parametric family of inductive rules. In this family called \lambda-continuum, the inductive rule is defined as (here presented in modern transciption): 
+\begin{equation}
+\Pr(X_{n+1} = c_i | n_1,\dotsc,n_t) = \frac{n_i + \lambda}{n + \lambda t}.
+\end{equation}
+
+where \( \lambda > 0\) can be freely chosen. Speaking in modern Bayesian terms, the parameter affects the way in which a reasoner updates her beliefs given the evidence. It is supposed to indicate her `inductive character' [[citep:sznajder17_induc_logic_concep_spaces][p. 7]] 
+
 
 Describe shortly Carnap's \lambda -continuum: A parametric family of inductive rules. What do they enable? again using the example. Show effect of different lambdas in a graph
+
+- Is again probability function since linear combination of probability functions
 
 ** The \lambda-continuum: probability Theory
 
@@ -284,6 +338,17 @@ Quote Skyrms, Zabell, that symmetric dirichlet distribution account for this in 
 * What's next?
 
 Give some ideas on where to go. obviously, \lambda -\gamma -continuum. Also: Frequencies of frequencies (noted by Turing, says Zabell, look into that a little).
+- The inductive cases here overly simplistic. what is, for example, with predictor variables? for swans, well we only look at swans. but for more complicated predicate we want to say more, say predict one height from ones weight. (Not run into value continuum problems by giving a discrete partition) Partially observing the object?
 * Appendix
-** Equation 
+- Equality of Carnap's \tau and \(f_n\) (Section [[Constraints Probability Theory]]) ::
+Let t = \kappa and /n/ = /N/, then
+\begin{align*}
+\tau &= \binom{n+t-1}{t-1} = \frac{(n+t-1)!}{(t-1)!(n+t-1-(t-1))!} \\
+&    = \frac{(n+t-1)!}{(t-1)!n!} = \binom{n+t-1}{n} \\
+&= f_n.
+\end{align*}
+
+
+
+
 \printbibliography
