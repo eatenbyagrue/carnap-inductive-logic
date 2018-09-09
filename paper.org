@@ -313,27 +313,34 @@ So far the technical aspects. How useful is this rule for the purpose of explica
 
 First, the rule satisfies the principle of positive instantial relevance (PPIR). To see this, just note that the probability (Equation \ref{eq:ruleprob2}) is strictly monotonically increasing in \(n_i\). So for any previous evidence, the posterior probability given \(n_i + 1\) increases over \(n_i\). We see that symmetry and \Str-symmetry taken together suffice to satisfy PPIR.
 
-Second, one of Carnap's main motivations was to justify inductive inferences on purely logico-mathematical grounds. Carnap himself, however, already described the assumption of \Str-symmetry as very hard to argue for. He does not give an independent argument for accepting this assumption.
+Second, one of Carnap's main motivations was to justify inductive inferences on purely logico-mathematical grounds. Carnap himself, however, already described the assumption of \Str-symmetry as very hard to argue for. He does not give an independent argument for accepting this assumption. However, the results are intuitively appealing: It seems like a consequent application of the principle of indifference.
 
 *** TODO Describe how this is equivalent to assuming a flat prior over theta or hint at next section
 
-* TODO The \lambda-continuum
+* The \lambda-continuum
 
 citet:carnap52_contin_induc_method introduces a parametric family of inductive rules. In this family called \lambda-continuum, the inductive rule is defined as (here presented in modern transciption): 
 \begin{equation}
+\label{eq:problamb}
 \Pr(X_{n+1} = c_i | n_1,\dotsc,n_t) = \frac{n_i + \lambda}{n + \lambda t}.
 \end{equation}
 
-where \( \lambda > 0\) can be freely chosen. Speaking in modern Bayesian terms, the parameter affects the way in which a reasoner updates her beliefs given the evidence. It is supposed to indicate her `inductive character' [[citep:sznajder17_induc_logic_concep_spaces][p. 7]] 
+where \( \lambda > 0\) can be freely chosen. 
 
+*** TODO Note that neither c\dag nor c* are compatible. but we keep symmetry.
+ 
+Speaking in modern Bayesian terms, the parameter affects the way in which a reasoner updates her beliefs given the evidence. It is supposed to indicate her `inductive character' [[citep:sznajder17_induc_logic_concep_spaces][p. 7]]. This claim is evidenced by the fact that the right hand side in Equation \ref{eq:problamb} can be rewritten as citep:kruschke11_doing_bayes,sznajder17_induc_logic_concep_spaces: 
 
-Describe shortly Carnap's \lambda -continuum: A parametric family of inductive rules. What do they enable? again using the example. Show effect of different lambdas in a graph
+\begin{equation}
+ \left(\frac{n}{n + \lambda}\right)\frac{n_i}{n} +  \left( \frac{\lambda}{n+\lambda} \right) \frac{1}{t}.   
+\end{equation}
 
+On the left hand side is the weighted so-called empirical factor \(\frac{n_i}{n}\), on the right hand side the weighted logical factor \(\frac{1}{t}\). The empirical factor is completely determined by the given data, the logical factor completely by the `logicality', that is our prior probabilities. Only the weights depend on \lambda. For \lambda = 1, the \lambda-rule is equivalent to the rule defined by \c*. For 0 < \lambda < 1,  
 - Is again probability function since linear combination of probability functions
-
 ** The \lambda-continuum: probability Theory
 
-Quote Skyrms, Zabell, that symmetric dirichlet distribution account for this in probability theory. maybe develop this for a simple example! -> beta distribution. see also Kruschke.
+ - Analysis with theta etc to make clear what exactly lambda rule is doing bias wise. now it's clear why we did all the probability circus!
+ Quote Skyrms, Zabell, that symmetric dirichlet distribution account for this in probability theory. maybe develop this for a simple example! -> beta distribution. see also Kruschke.
 
 * What's next?
 
