@@ -25,14 +25,29 @@
 #+OPTIONS: toc:nil num:t author:nil subtitle:nil
 #+TITLE: Carnap's Early Inductive Logic
 #+SUBTITLE: XxXx words
+
+#+begin_abstract
+This paper examines Rudolf Carnap's early attempts at solving the old problem of induction, famously posed by David Hume. The problem of induction, roughly, consists in giving a justification for inductive inferences. Inductive inferences reason from the observed to the unobserved. Carnap proposes to tackle this problem by explicating the concept of probability. By basing probabilistic inferences on a purely logical foundation, he seeks to give a general account of when evidence confirms a hypothesis, thus justifying inductive inferences /a priori/. In this paper, we take a closer look at exactly what Carnap's inductive logic consists in, and draw parallels to more modern probability theory. We argue that (i) Carnap does not solve the problem of induction, since his argument begs the question, but that (ii) his inductive logic nevertheless is still interesting and relevant since it provides a way to systematically explore the prior information that goes into an inductive inference.
+#+end_abstract
+
 \thispagestyle{empty}
 
 \newpage
 \tableofcontents
 \newpage
 
-In this paper we want to examine Rudolf Carnap's early attempts at solving the old problem of induction, famously posed by David Hume. 
 * Introduction
+
+We are interested in what Carnap calls a /singular predictive inference/, an inference from a series of observed samples to another, yet unobserved sample. Put quite succinctly, Hume argues that any such inference needs to presuppose that the unobserved in some relevant way resembles the observed, as for example tomorrow resembles the past in that the sun will shine again. But justification of this principle is not, says Hume, possible without presupposing the very same or similar principle, thus rendering any such justification circular. 
+
+While not the only goal of Carnap's Logical Foundations of Probability cite:carnap50_logic_found_probab, addressing the problem of induction is certainly one of its central concerns \LFp{1}. Carnap also intends to explicate the concepts of confirmation and probability. In fact, he sees the latter as a means to attain the former, and plans his methodology thus \LFp{178}: Suppose someone wants to know whether it rains tomorrow. Now, since this is not a matter of rationalist certainty, substituting with `given what I know, is the probability that it'll rail tomorrow high?'. The available evidence might be that it is cloudy, and that in the past it rained when it's cloudy the day before. To reasonably infer the conclusion, Carnap acknowledges that our reasoner needs to assume something like the predictability of her world, or as Carnap puts it:
+\begin{quote}[...] A kind of events which have occurred in the past very fre-
+quently under certain conditions will under the same conditions occur
+very frequently in the future. \LFp{180}
+\end{quote}
+Now, he reasons, if she would know the probability that it'll rain tomorrow given her evidence, she would know whether it is high or not and therefore have a justified belief of the future. He argues that to know the probability is to know how much the evidence confirms the hypothesis, which can be analyzed by purely logical means. To develop such a formal confirmation function then takes up much of the logical foundations.
+
+In the following, we retell Carnap's logical developing of a confirmation function, and simultaneously `translate' the central tenets into more standard probability theory. We conclude that Carnap's rule for predictive inference are not, like he claims, a consequence of purely logical considerations, but instead make subtle assumptions, for which it becomes clear that, when isolated, they need to be independently justified. His logical foundations, therefore, do not `solve' the problem of induction, but help to shed light on the project to clarify what prior beliefs or /inductive biases/ are tacitly presupposed in inductive inferences.
 
 - Describe the problem of induction
 - What is induction?
@@ -73,7 +88,7 @@ The range \textfrak{R}_i of a sentence /i/ is the set of state descriptions in w
 \end{align*}  
 
 Where `.' denotes a conjunction and `\sim' denotes a negation in Carnap's 
-notation. In Carnap's system, the \Str{} are defined over isomorphic \Z. Two state descriptions are isomorphic when there is a correlation---a one-to-one mapping---between individual constants \LFp{109}, [[citep:caruspt_rudol_carnap][p. 8]]., citep:carus_rudol_carnap_carnap_induc_logic 
+notation. In Carnap's system, the \Str{} are defined over isomorphic \Z. Two state descriptions are isomorphic when there is a correlation---a one-to-one mapping---between individual constants \LFp{109}, [[citep:carus_rudol_carnap_carnap_induc_logic][p. 8]].  
 
 With the underlying language described, Carnap defines his confirmation function for sentences /h,e/, expressing the degree to which evidence /e/ confirms hypothesis /h/. He does so by first defining a measure function \m{} for sentences of \L_N \LFp{295} to the unit interval. Then he defines a confirmation function 
 
@@ -159,9 +174,9 @@ Carnap defines a symmetric \m function: If \(\Z_i\) and \(\Z_j\) are isomorphic,
 
 we receive a confirmation function which assigns equal confirmation to all state descriptions. This means that to determine the confirmation of a state description, it is sufficient to determine the confirmation of the corresponding structure description. Carnap also calls this feature `The principle of invariance' \LFp{489}, since the confirmation is invariant under permutation of the individual constant, while keeping the predicates fixed. 
 
-He argues that this principle is tacitly agreed on by many authors involved in, using his terminology, explicating probability_1 \LFp{488}. His argument for this principle is straight-forward: On purely logical grounds, we do not have any more reason to expect a particular individual to have a certain property than any other individual. Hence a logical confirmation function does not distinguish these cases. As cite:caruspt_rudol_carnap note, subjective Bayesians would not agree with this assessment. Although they might agree about the specifics of the observations, they also allow non-symmetric[fn::We use /non-symmetric/ instead of /asymmetric/ to emphasize the negation of the specific sense in which symmetry is used here.] prior probability functions. 
+He argues that this principle is tacitly agreed on by many authors involved in, using his terminology, explicating probability_1 \LFp{488}. His argument for this principle is straight-forward: On purely logical grounds, we do not have any more reason to expect a particular individual to have a certain property than any other individual. Hence a logical confirmation function does not distinguish these cases. As cite:carus_rudol_carnap_carnap_induc_logic note, subjective Bayesians would not agree with this assessment. Although they might agree about the specifics of the observations, they also allow non-symmetric[fn::We use /non-symmetric/ instead of /asymmetric/ to emphasize the negation of the specific sense in which symmetry is used here.] prior probability functions. 
 
-The requirement of symmetry already appeared in cite:johnson24_logic_part_iii under the name `permutation postulate'. Interestingly, Carnap cites Johnson [[citep:caruspt_rudol_carnap][p. 10]], but is apparently not aware of his result [[citep:caruspt_rudol_carnap][p. 8]]. 
+The requirement of symmetry already appeared in cite:johnson24_logic_part_iii under the name `permutation postulate'. Interestingly, Carnap cites Johnson [[citep:carus_rudol_carnap_carnap_induc_logic][p. 10]], but is apparently not aware of his result [[citep:carus_rudol_carnap_carnap_induc_logic][p. 8]]. 
 
 Symmetry alone does not yield a unique confirmation function, as we'll discuss next.
 
@@ -211,11 +226,13 @@ where /N/, like before, is the number of individuals and \kappa the number of {Q
 \[
 \zeta_i = {N \choose N_1,\dots,N_{\kappa}}
 \]
-where \( N_1,\dots,N_{\kappa} \) gives the number of individuals that instantiate each of the \kappa many Q-predicates in \Z_i. Carnap's terminology can be a bit cumbersome, which makes these definitions less obvious. To help clarify, we follow citet:carnap55_statis_induc_probab,caruspt_rudol_carnap and give the following simple example.
+where \( N_1,\dots,N_{\kappa} \) gives the number of individuals that instantiate each of the \kappa many Q-predicates in \Z_i. Carnap's terminology can be a bit cumbersome, which makes these definitions less obvious. To help clarify, we follow citet:carnap55_statis_induc_probab,carus_rudol_carnap_carnap_induc_logic and give the following simple example.
 
-- Example 2 :: Let \L_4 be a language consisting of a single predicate /P/ and four individual constants /a,b,c,d/. Then we have \(\kappa = 2\) Q-predicates (just /P/ and \(\sim P\)), and therefore \(\zeta = \kappa^N = 16 \) state descriptions. We have \(\tau = {5 \choose 1}\) structure descriptions. \Str_3, whose state descriptions have two individuals that are /P/ and two that aren't, has \(\zeta_{6} = \dots = \zeta_{11} = {4 \choose 2} = 6 \) state descriptions. The corresponding measures are given in the overview table. Filled circles stand for instantiated predicates.
+- Example 2 :: Let \L_4 be a language consisting of a single predicate /P/ and four individual constants /a,b,c,d/. Then we have \(\kappa = 2\) Q-predicates (just /P/ and \(\sim P\)), and therefore \(\zeta = \kappa^N = 16 \) state descriptions. We have \(\tau = {5 \choose 1}\) structure descriptions. \Str_3, whose state descriptions have two individuals that are /P/ and two that aren't, has \(\zeta_{6} = \dots = \zeta_{11} = {4 \choose 2} = 6 \) state descriptions. The corresponding measures are given in Table [[tab:le]].
 
-#+ATTR_LATEX: :float t :environment longtable 
+#+CAPTION: Overview of Example 2. Filled circles stand for instantiated predicates.
+#+NAME: tab:le
+#+ATTR_LATEX: :float ht 
 | \Str_j | \Z_i | P(a) | P(b) | P(c) | P(d) | \m\dag(\Str_j) | \m\dag(\Z_i)  | \m*(\Str_j)  | \m*(\Z_i)     |
 |--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
 |--------+------+------+------+------+------+----------------+---------------+--------------+---------------|
@@ -291,7 +308,7 @@ In probability theory, the corresponding rule can be stated as
 
 This rule can be derived from both symmetry requirements (see Appendix). 
 
-Furthermore, as cite:zabell07_carnap states, just symmetry is enough to establish the following equality (again, see Appendix):
+Furthermore, as cite:zabell07_carnap states, just symmetry is enough to establish the following equality (again, see Appendix): 
 \begin{equation}
 \label{eq:probequa}
   \Pr(X_{n+1} = c_i | X_1 = e_1,\dotsc,X_n = e_n) = \Pr(X_{n+1} = c_i| n_1,\dotsc,n_t) 
@@ -357,10 +374,10 @@ where p(\theta) is the probability density function for our prior belief over \(
 *** TODO Check exact wording of the jungates
 Hence, conditioning on the information of \(n_i\) observed heads out of /n/ throws gives a beta distribution with parameters \(n_i+a,n-n_i+b\).
 
-Now, the mean or expected value of a beta distribution with parameters \alpha, \beta is \( \frac{\alpha}{\alpha + \beta} \). In the present case this gives and can then be rearranged as:
+Now, the mean or expected value of a beta distribution with parameters \alpha, \beta is \( \frac{\alpha}{\alpha + \beta} \). Applied to our case, this gives:
 \begin{equation}
 \label{eq:betamean}
-\frac{n_i + a}{n+a+b} = \left( \frac{n}{n+a+b}\right) \frac{n_i}{n} + \left( \frac{a+b}{n+a+b} \right) \frac{a}{a+b}
+\frac{n_i + a}{n+a+b} = \left( \frac{n}{n+a+b}\right) \frac{n_i}{n} + \left( \frac{a+b}{n+a+b} \right) \frac{a}{a+b}.
 \end{equation}
 With the additional assumption of a symmetric prior, that is /a=b/, and setting \(a+b = \lambda \), we get exactly Equation \ref{eq:lambmixt} for \(t=2\), the binomial case. Bababooey, what a neat result! 
 
@@ -370,13 +387,26 @@ As noted before, this generalizes to the multinomial case, too.
 
 This result is quite helpful in understanding what this `inductive character' of a \lambda-value is about. We can describe the `inductive character' now also by ascribing differently shaped symmetric priors to the reasoner, at least as so far as her singular predictive inference is concerned.  
 
-*** TODO Maybe add some priors for differnt lambda values
+#+NAME: fig:simplebayes
+#+ATTR_LATEX: :width 1\linewidth 
+#+CAPTION: Plots of probability densities for a beta distribution with parameters \(\lambda = a + b\) and \(a=b\).
+[[./SimpleBayes.pdf]]
+
+A very interesting observation is the case of \c*. Recall that \c* requires symmetry of the state descriptions as well as \Str-symmetry, which corresponds to \lambda = 1 (see Figure \ref{fig:simplebayes}). Intuitively, one might think that this corresponds to a flat prior over \theta, however, \lambda = 1 gives a U-shaped prior favoring more extreme over intermediate values of \theta. It'd be quite interesting to look further into this apparently unintuitive result. 
 
 * What's next?
 
-The discussion here is far from exhausting the topic of Carnap's inductive logic. Most obviously, we only looked at Carnap's earlier inductive logic and didn't touch on his later work citep:carnap71_basic_system_induc_logic_part_i,carnap80_basic_system_induc_logic_part_ii.
-Give some ideas on where to go. obviously, \lambda -\gamma -continuum. Also: Frequencies of frequencies (noted by Turing, says Zabell, look into that a little).
-- The inductive cases here overly simplistic. what is, for example, with predictor variables? for swans, well we only look at swans. but for more complicated predicate we want to say more, say predict one height from ones weight. (Not run into value continuum problems by giving a discrete partition) Partially observing the object?
+The discussion here is far from exhausting the topic of Carnap's inductive logic, of course, but there is only so much content that fits in a short class paper.
+
+Most obviously, we only looked at Carnap's earlier inductive logic and didn't touch on his later work citep:carnap71_basic_system_induc_logic_part_i,carnap80_basic_system_induc_logic_part_ii, which includes asymmetric prediction rules in the \lambda-\gamma-continuum. It turns out that this continuum, too, can be modeled with Dirichlet priors like in the previous section, by giving up the requirement that the priors are symmetric citep:degroot70_optim_statis_decis.
+
+Carnap's inductive rules claim that the probability of an observation's type depends only on the previous frequency of that type and the total number of observations, disregarding other observations. But the frequency of frequencies might also be relevant [[citep:zabell05_symmet_discon][p. 11]], as evidenced in learning scenarios where the evidence indirectly includes information about the frequencies. Hierarchical Bayesian models, for example, address similar problems. This would make a nice further research topic.
+
+It is not clear to the writer how standard prediction cases of the following sort would be represented in Carnap's logic. Given some previous data points, we want to estimate a person's weight from just their height. Putting aside the additional complication that so far we only looked at finitely valued random variables (continous values are addressed in citet:skyrms93_carnap_induc_logic_value_contin), how would the predictor variable (the height) be addressed? By partially observing an instance?
+
+More questions arise when not fixing the language and available predicates in advance, as for example in the sampling of species problem [[citep:zabell05_symmet_discon][p. 217ff.]]. We also conveniently disregarded the assumption that the random variables are i.i.d. Relatedly, we only looked at a finite language \L_N.
+
+So, plenty opportunity for more research! 
 
 * Conclusion
 
