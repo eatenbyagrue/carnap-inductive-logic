@@ -38,12 +38,10 @@ This paper examines Rudolf Carnap's early attempts at solving the old problem of
 
 * Introduction
 
-We are interested in what Carnap calls a /singular predictive inference/ \LFp{185}, an inference from a series of observed samples to another, yet unobserved sample. Put quite succinctly, Hume argues that any such inference needs to presuppose that the unobserved in some relevant way resembles the observed, as for example tomorrow resembles the past in that the sun will shine again. But justification of this principle is not, says Hume, possible without presupposing the very same or similar principle, thus rendering any such justification circular. 
+We are interested in what Carnap calls a /singular predictive inference/ \LFp{185}, an inference from a series of observed samples to another, yet unobserved sample. Put quite succinctly, Hume argues that any such inference needs to presuppose that the unobserved in some relevant way resembles the observed, as for example tomorrow resembles the past in that the sun will shine again. But justification of this principle is not, says Hume, possible without presupposing the very same or similar principle, thus rendering any such justification circular citep:henderson18_probl_induc. 
 
 While not the only goal of Carnap's Logical Foundations of Probability cite:carnap50_logic_found_probab, addressing the problem of induction is certainly one of its central concerns \LFp{1}. Carnap also intends to explicate the concepts of confirmation and probability. In fact, he sees the latter as a means to attain the former, and plans his methodology thus \LFp{178}: Suppose someone wants to know whether it rains tomorrow. Now, since this is not a matter of rationalist certainty, substituting with `given what I know, is the probability that it'll rail tomorrow high?'. The available evidence might be that it is cloudy, and that in the past it rained when it's cloudy the day before. To reasonably infer the conclusion, Carnap acknowledges that our reasoner needs to assume something like the predictability of her world, or as Carnap puts it:
-\begin{quote}[...] A kind of events which have occurred in the past very fre-
-quently under certain conditions will under the same conditions occur
-very frequently in the future. \LFp{180}
+\begin{quote}[...] A kind of events which have occurred in the past very frequently under certain conditions will under the same conditions occur very frequently in the future. \LFp{180}
 \end{quote}
 Now, he reasons, if she would know the probability that it'll rain tomorrow given her evidence, she would know whether it is high or not and therefore have a justified belief of the future. He argues that to know the probability is to know how much the evidence confirms the hypothesis, which can be analyzed by purely logical means. To develop such a formal confirmation function then takes up much of the logical foundations.
 
@@ -264,7 +262,7 @@ Carnap's \Str-symmetry can be captured by requiring the same probability for all
 \label{eq:freq}
 f_n = \binom{n + t - 1}{n}
 \end{equation}
-which is equal to Carnap's number of structure descriptions \tau[fn:: citet:zabell07_carnap,zabell09_carnap_logic_induc_infer gives \(f_n\) instead as \({n +t -1 \choose t}\), citing cite:feller68_introd_probab_theor_applic, which we strangely found to be not equivalent to Carnap's formulation and also to not yield the later results. We suspect we made a mistake somewhere.] (see Appendix). The frequency count's probability is then accordingly
+which is equal to Carnap's number of structure descriptions \tau[fn:: citet:zabell07_carnap,zabell09_carnap_logic_induc_infer gives \(f_n\) instead as \({n +t -1 \choose t}\), citing cite:feller68_introd_probab_theor_applic, which we strangely found to be not equivalent to Carnap's formulation and also to not yield the later results. We suspect we made a mistake somewhere.]. The frequency count's probability is then accordingly
 \begin{equation}
 \label{eq:probfreq2}
 \Pr(n_1,\dotsc,n_t) = \frac{1}{f_n}.
@@ -296,9 +294,9 @@ In probability theory, the corresponding rule can be stated as
 \Pr(X_{n+1} = c_i | X_1 = e_1,\dotsc,X_n = e_n) = \frac{n_i + 1}{n + t}.
 \end{equation}
 
-This rule can be derived from both symmetry requirements (see Appendix). 
+This rule can be derived from both symmetry requirements. 
 
-Furthermore, as cite:zabell07_carnap states, just symmetry is enough to establish the following equality (again, see Appendix): 
+Furthermore, as cite:zabell07_carnap states, just symmetry is enough to establish the following equality. 
 \begin{equation}
 \label{eq:probequa}
   \Pr(X_{n+1} = c_i | X_1 = e_1,\dotsc,X_n = e_n) = \Pr(X_{n+1} = c_i| n_1,\dotsc,n_t) 
@@ -401,17 +399,5 @@ So, plenty opportunity for more research!
 * Conclusion
 
 We argued that (i) Carnap does not solve the problem of induction by giving his inductive rules, and (ii) that his system still is highly relevant because it systematized inductive bias. We reached conclusion (i) by giving a step-wise reconstruction of central aspects of his foundations of probability, exposing the assumptions necessary to reach the inductive rules. In particular, both types of symmetry are needed to reach \c*, but \Str-symmetry is not argued for. Assuming symmetry of the state descriptions enforces something akin to the uniformity of nature on the confirmation function, and is not justified by logical means alone. The relaxing of the symmetry-requirement in the \lambda-rule widens the class of admissible confirmation functions, but does so without justifying a specific inference. Conclusion (ii) can be drawn from the result that the innocuous-looking \lambda-rule is in a sense equivalent to assuming a specific type of prior distribution in a parameter estimation problem. This opens up the discussion up to a whole range of arguments and methods in the Bayesian literature, thereby providing a bridge between, on the face of it, different problems. 
-
-* Appendix
-- Equality of Carnap's \tau and \(f_n\) (Section [[Constraints Probability Theory]]) ::
-Let t = \kappa and /n/ = /N/, then
-\begin{align*}
-\tau &= \binom{n+t-1}{t-1} = \frac{(n+t-1)!}{(t-1)!(n+t-1-(t-1))!} \\
-&    = \frac{(n+t-1)!}{(t-1)!n!} = \binom{n+t-1}{n} \\
-&= f_n.
-\end{align*}
-
-
-
 
 \printbibliography
