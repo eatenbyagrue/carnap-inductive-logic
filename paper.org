@@ -69,7 +69,7 @@ The range \textfrak{R}_i of a sentence /i/ is the set of state descriptions in w
 \begin{align*}
   P(a).P(b).\sim P(c) \\
   P(a).\sim P(b).P(c) \\
-  \sim P(a).P(b).P(c) \\
+  \sim P(a).P(b).P(c)
 \end{align*}  
 
 Where `.' denotes a conjunction and `\sim' denotes a negation in Carnap's 
@@ -303,7 +303,7 @@ which yields together with Equation \ref{eq:ruleprob}:
 \Pr(X_{n+1} = c_i | n_1,\dotsc,n_t) = \frac{n_i + 1}{n + t}.
 \end{equation}
 
-That is, the probability that the next observed variable takes the value /c_i/ is not dependent only on the frequency counts. This is what Carnap stated in his formulation of the inductive rule for \c*, derived in probability theory.
+That is, the probability that the next observed variable takes the value /c_i/ is not dependent only on the frequency counts. This is what Carnap stated in his formulation of the inductive rule for \c*, derived in probability theory. In fact, just \(n_i\) and /n/ suffice, which can be easily seen by varying the \(n_j,~j\not=i\), while keeping \(n_i\) and /n/ fixed.
 
 Let us look at an example which highlights the parallels both ways of addressing the problem. We look again in Carnap's system at Example 2 with a single predicate /P/ and four individual constants. Suppose we observed three /P/ already. To what degree does `\(P(a).P(b).P(c)\)' confirm `\(P(d)\)'? The only two state descriptions not ruled out by the evidence are \Z_1 and \Z_2 (see table in Section [[The Function c*]]). We can quickly judge that the confirmation has to be \(\frac{\sfrac{1}{5}}{\sfrac{1}{5} + \sfrac{1}{20}} = \sfrac{4}{5} \). Using the inductive rule, we get for \(s_i = s = 3, \kappa =2\) a confirmation of \(\c\text{*}(h,e) = \sfrac{4}{5}\). 
 
@@ -322,30 +322,65 @@ Second, one of Carnap's main motivations was to justify inductive inferences on 
 citet:carnap52_contin_induc_method introduces a parametric family of inductive rules. In this family called \lambda-continuum, the inductive rule is defined as (here presented in modern transciption): 
 \begin{equation}
 \label{eq:problamb}
+\tag{$\lambda$-rule}
 \Pr(X_{n+1} = c_i | n_1,\dotsc,n_t) = \frac{n_i + \lambda}{n + \lambda t}.
 \end{equation}
 
 where \( \lambda > 0\) can be freely chosen. 
 
-*** TODO Note that neither c\dag nor c* are compatible. but we keep symmetry.
+*** TODO Note that neither c\dag nor c* are compatible. but we keep symmetry. 
  
 Speaking in modern Bayesian terms, the parameter affects the way in which a reasoner updates her beliefs given the evidence. It is supposed to indicate her `inductive character' [[citep:sznajder17_induc_logic_concep_spaces][p. 7]]. This claim is evidenced by the fact that the right hand side in Equation \ref{eq:problamb} can be rewritten as citep:kruschke11_doing_bayes,sznajder17_induc_logic_concep_spaces: 
 
 \begin{equation}
+\label{eq:lambmixt}
  \left(\frac{n}{n + \lambda}\right)\frac{n_i}{n} +  \left( \frac{\lambda}{n+\lambda} \right) \frac{1}{t}.   
 \end{equation}
 
-On the left hand side is the weighted so-called empirical factor \(\frac{n_i}{n}\), on the right hand side the weighted logical factor \(\frac{1}{t}\). The empirical factor is completely determined by the given data, the logical factor completely by the `logicality', that is our prior probabilities. Only the weights depend on \lambda. For \lambda = 1, the \lambda-rule is equivalent to the rule defined by \c*. For 0 < \lambda < 1,  
-- Is again probability function since linear combination of probability functions
-** The \lambda-continuum: probability Theory
+On the left hand side is the weighted so-called empirical factor \(\frac{n_i}{n}\), on the right hand side the weighted logical factor \(\frac{1}{t}\). The empirical factor is completely determined by the given data, the logical factor completely by the `logicality', that is our prior probabilities. Only the weights depend on \lambda. For \lambda = 1, the \lambda-rule is equivalent to the rule defined by \c*. For fixed /n/ and /n_i/, an higher value of \lambda means less weight on the empirical factor and more weight on the logical factor. The `inductive character' can thus be described by noting that a lower \lambda respects the data more, while a higher lambda values the prior motivated by logical considerations more. Carnap introduced a parameter to describe the responsiveness to data a reasoner exhibits. Can this be made more explicit? What other properties does the \lambda-rule have? 
 
- - Analysis with theta etc to make clear what exactly lambda rule is doing bias wise. now it's clear why we did all the probability circus!
- Quote Skyrms, Zabell, that symmetric dirichlet distribution account for this in probability theory. maybe develop this for a simple example! -> beta distribution. see also Kruschke.
+- Is again probability function since linear combination of probability functions
+ 
+** Bayesian Parameter Estimation 
+
+With a bit more Bayesian theory, we can elucidate the role of the \lambda-parameter.
+
+Generally, Carnap's \lambda-rule correspond to a multinomial parameter estimation with symmetric Dirichlet priors citep:skyrms93_carnap_induc_logic_value_contin,skyrms96_carnap_bayes.[fn::Note that the `symmetric' used here is a different terminology than for Carnap. The `symmetric prior' refers to the symmetric shape of the distribution.] For our purposes, it is helpful to look at a slightly more specific case, as in Example\nbsp{}2. A special case of the multinomial is the binomial case, that is, a random variable with two values. The corresponding prior is Beta distributed, which we will now examine. 
+
+The way we modeled the inference problem so far was as if there is a data-generating process out there, in the world, that is responsible for observations. Now, In the binomial case, this can be viewed as, e.g. the unknown bias of a coin, \theta, where we're interested in whether the coin comes up heads. We model our prior belief as a distribution over the parameter \( \theta \in [0,1] \). By making observations, we learn about this parameter through Bayesian conditionalization. When estimate the probability of the next throw coming up heads by taking the expected value of \theta. 
+
+Formally, we calculate the posterior distribution by conditionalizing on the observed data via Bayes theorem:[fn::The notation is slightly botched, but simplifies combining the previous results with the following.]
+\begin{equation}
+  p(\theta|n_i,n) = \frac{p(n_i,n|\theta)p(\theta)}{p(n_i,n)}
+\end{equation}
+where p(\theta) is the probability density function for our prior belief over \(\theta \sim beta(a,b)\). The beta distribution is a so-called conjugate prior to the binomial distribution of the likelihood \(p(n_i,n|\theta)\), such that the resulting posterior is again beta distributed.    
+*** TODO Check exact wording of the jungates
+Hence, conditioning on the information of \(n_i\) observed heads out of /n/ throws gives a beta distribution with parameters \(n_i+a,n-n_i+b\).
+
+Now, the mean or expected value of a beta distribution with parameters \alpha, \beta is \( \frac{\alpha}{\alpha + \beta} \). In the present case this gives and can then be rearranged as:
+\begin{equation}
+\label{eq:betamean}
+\frac{n_i + a}{n+a+b} = \left( \frac{n}{n+a+b}\right) \frac{n_i}{n} + \left( \frac{a+b}{n+a+b} \right) \frac{a}{a+b}
+\end{equation}
+With the additional assumption of a symmetric prior, that is /a=b/, and setting \(a+b = \lambda \), we get exactly Equation \ref{eq:lambmixt} for \(t=2\), the binomial case. Bababooey, what a neat result! 
+
+In sum, for predicting the next throw of heads in a binomial model using a symmetric beta prior by taking the expected value of the posterior, we get precisely the same result as modeling a similar problem in Carnap's inductive logic as described in this paper and employing the \lambda-rule.
+
+As noted before, this generalizes to the multinomial case, too. 
+
+This result is quite helpful in understanding what this `inductive character' of a \lambda-value is about. We can describe the `inductive character' now also by ascribing differently shaped symmetric priors to the reasoner, at least as so far as her singular predictive inference is concerned.  
+
+*** TODO Maybe add some priors for differnt lambda values
 
 * What's next?
 
+The discussion here is far from exhausting the topic of Carnap's inductive logic. Most obviously, we only looked at Carnap's earlier inductive logic and didn't touch on his later work citep:carnap71_basic_system_induc_logic_part_i,carnap80_basic_system_induc_logic_part_ii.
 Give some ideas on where to go. obviously, \lambda -\gamma -continuum. Also: Frequencies of frequencies (noted by Turing, says Zabell, look into that a little).
 - The inductive cases here overly simplistic. what is, for example, with predictor variables? for swans, well we only look at swans. but for more complicated predicate we want to say more, say predict one height from ones weight. (Not run into value continuum problems by giving a discrete partition) Partially observing the object?
+
+* Conclusion
+
+
 * Appendix
 - Equality of Carnap's \tau and \(f_n\) (Section [[Constraints Probability Theory]]) ::
 Let t = \kappa and /n/ = /N/, then
