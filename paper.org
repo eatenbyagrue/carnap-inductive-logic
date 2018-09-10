@@ -38,7 +38,7 @@ This paper examines Rudolf Carnap's early attempts at solving the old problem of
 
 * Introduction
 
-We are interested in what Carnap calls a /singular predictive inference/, an inference from a series of observed samples to another, yet unobserved sample. Put quite succinctly, Hume argues that any such inference needs to presuppose that the unobserved in some relevant way resembles the observed, as for example tomorrow resembles the past in that the sun will shine again. But justification of this principle is not, says Hume, possible without presupposing the very same or similar principle, thus rendering any such justification circular. 
+We are interested in what Carnap calls a /singular predictive inference/ \LFp{185}, an inference from a series of observed samples to another, yet unobserved sample. Put quite succinctly, Hume argues that any such inference needs to presuppose that the unobserved in some relevant way resembles the observed, as for example tomorrow resembles the past in that the sun will shine again. But justification of this principle is not, says Hume, possible without presupposing the very same or similar principle, thus rendering any such justification circular. 
 
 While not the only goal of Carnap's Logical Foundations of Probability cite:carnap50_logic_found_probab, addressing the problem of induction is certainly one of its central concerns \LFp{1}. Carnap also intends to explicate the concepts of confirmation and probability. In fact, he sees the latter as a means to attain the former, and plans his methodology thus \LFp{178}: Suppose someone wants to know whether it rains tomorrow. Now, since this is not a matter of rationalist certainty, substituting with `given what I know, is the probability that it'll rail tomorrow high?'. The available evidence might be that it is cloudy, and that in the past it rained when it's cloudy the day before. To reasonably infer the conclusion, Carnap acknowledges that our reasoner needs to assume something like the predictability of her world, or as Carnap puts it:
 \begin{quote}[...] A kind of events which have occurred in the past very fre-
@@ -47,24 +47,14 @@ very frequently in the future. \LFp{180}
 \end{quote}
 Now, he reasons, if she would know the probability that it'll rain tomorrow given her evidence, she would know whether it is high or not and therefore have a justified belief of the future. He argues that to know the probability is to know how much the evidence confirms the hypothesis, which can be analyzed by purely logical means. To develop such a formal confirmation function then takes up much of the logical foundations.
 
-In the following, we retell Carnap's logical developing of a confirmation function, and simultaneously `translate' the central tenets into more standard probability theory. We conclude that Carnap's rule for predictive inference are not, like he claims, a consequence of purely logical considerations, but instead make subtle assumptions, for which it becomes clear that, when isolated, they need to be independently justified. His logical foundations, therefore, do not `solve' the problem of induction, but help to shed light on the project to clarify what prior beliefs or /inductive biases/ are tacitly presupposed in inductive inferences.
-
-- Describe the problem of induction
-- What is induction?
-- Carnap's approach: explicate probability
-- talk about Carnap's concept of probability 
-- But argue that in the end (of what is surveyed in this article), problem of induction is not solved, but logical probability in particular is explicated by highlighting reasonable biases
-- Carnap on induction: p. 178ff.
-- Second aim of this paper is to expound the structure of the formalism and explain which principles and assumptions lead to which conclusions. 
-- Which cases are we looking at? distinguish between enumerative inductivion, generalized induction etc (e.g. see Springier)
-- Do talk a bit about carnap's framework-choice stuff and how he thinks this relates to inductive logic: IL is a part of a framework, hence is defined for a particular language
-
+In the following, we retell Carnap's logical developing of a confirmation function, and simultaneously `translate' the central tenets into more standard probability theory. We conclude that Carnap's rule for predictive inference are not, like he claims, a consequence of purely logical considerations, but instead make subtle assumptions, for which it becomes clear that, when isolated, they need to be independently justified. His logical foundations, therefore, do not `solve' the problem of induction, but help to shed light on the project to clarify what prior beliefs or /inductive biases/ are tacitly presupposed in inductive inferences. 
 
 Induction as described in this paper always takes the form of an inference from something observed to something unobserved. Both the observed and the unobserved are expressed in formal sentences in citet:carnap50_logic_found_probab or with the help of set theory in more run-of-the-mill probability theory.
 
 * Developing a Framework for Confirmation  
 
 ** Carnap's Inductive System
+Carnap employs his central philosophical method---explication---to examine the scientific notion of /probability/. He distinguishes between two types of uses of the concept: First, the degree to which evidence confirms a hypothesis. In the Foundations still, he views this as a logical relation between the logical sentences stating the evidence and the hypothesis. Second, the relative frequency of an event occurring in a totality of events. This is an empirical matter. He aptly names these distinction probability_1 and probability_2, and only concerns himself with the former.
 
 Carnap starts out to explicate the concept of probability_1 by developing a first order language over which functions are defined. Eventually, the functions should assign probabilities to sentences. To develop a framework where he could achieve this, Carnap first defines a logical language. 
 
@@ -362,7 +352,7 @@ On the left hand side is the weighted so-called empirical factor \(\frac{n_i}{n}
 
 With a bit more Bayesian theory, we can elucidate the role of the \lambda-parameter.
 
-Generally, Carnap's \lambda-rule correspond to a multinomial parameter estimation with symmetric Dirichlet priors citep:skyrms93_carnap_induc_logic_value_contin,skyrms96_carnap_bayes.[fn::Note that the `symmetric' used here is a different terminology than for Carnap. The `symmetric prior' refers to the symmetric shape of the distribution.] For our purposes, it is helpful to look at a slightly more specific case, as in Example\nbsp{}2. A special case of the multinomial is the binomial case, that is, a random variable with two values. The corresponding prior is Beta distributed, which we will now examine. 
+Generally, Carnap's \lambda-rule correspond to a multinomial parameter estimation with symmetric Dirichlet priors citep:skyrms93_carnap_induc_logic_value_contin,skyrms96_carnap_bayes.[fn::Note that the `symmetric' used here is a different terminology than for Carnap. The `symmetric prior' refers to the symmetric shape of the distribution. Although these notions are not completely unrelated.] For our purposes, it is helpful to look at a slightly more specific case, as in Example\nbsp{}2. A special case of the multinomial is the binomial case, that is, a random variable with two values. The corresponding prior is Beta distributed, which we will now examine. 
 
 The way we modeled the inference problem so far was as if there is a data-generating process out there, in the world, that is responsible for observations. Now, In the binomial case, this can be viewed as, e.g. the unknown bias of a coin, \theta, where we're interested in whether the coin comes up heads. We model our prior belief as a distribution over the parameter \( \theta \in [0,1] \). By making observations, we learn about this parameter through Bayesian conditionalization. When estimate the probability of the next throw coming up heads by taking the expected value of \theta. 
 
@@ -410,6 +400,7 @@ So, plenty opportunity for more research!
 
 * Conclusion
 
+We argued that (i) Carnap does not solve the problem of induction by giving his inductive rules, and (ii) that his system still is highly relevant because it systematized inductive bias. We reached conclusion (i) by giving a step-wise reconstruction of central aspects of his foundations of probability, exposing the assumptions necessary to reach the inductive rules. In particular, both types of symmetry are needed to reach \c*, but \Str-symmetry is not argued for. Assuming symmetry of the state descriptions enforces something akin to the uniformity of nature on the confirmation function, and is not justified by logical means alone. The relaxing of the symmetry-requirement in the \lambda-rule widens the class of admissible confirmation functions, but does so without justifying a specific inference. Conclusion (ii) can be drawn from the result that the innocuous-looking \lambda-rule is in a sense equivalent to assuming a specific type of prior distribution in a parameter estimation problem. This opens up the discussion up to a whole range of arguments and methods in the Bayesian literature, thereby providing a bridge between, on the face of it, different problems. 
 
 * Appendix
 - Equality of Carnap's \tau and \(f_n\) (Section [[Constraints Probability Theory]]) ::
